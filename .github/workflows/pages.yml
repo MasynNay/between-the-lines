@@ -19,6 +19,17 @@ jobs:
     steps:
       - name: Check out the public site
         uses: actions/checkout@v4
+      - name: Bundle self-hosted PDF.js parser for private browser imports
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/btl-pdfjs" --no-save --omit=optional --ignore-scripts --no-audit --no-fund pdfjs-dist@4.10.38
+          mkdir -p demo/vendor
+          cp "$RUNNER_TEMP/btl-pdfjs/node_modules/pdfjs-dist/build/pdf.min.mjs" demo/vendor/pdf.min.mjs
+          cp "$RUNNER_TEMP/btl-pdfjs/node_modules/pdfjs-dist/build/pdf.worker.min.mjs" demo/vendor/pdf.worker.min.mjs
+          cp "$RUNNER_TEMP/btl-pdfjs/node_modules/pdfjs-dist/LICENSE" demo/vendor/LICENSE-PDFJS.txt
+          test -s demo/vendor/pdf.min.mjs
+          test -s demo/vendor/pdf.worker.min.mjs
       - name: Check demo assets and privacy boundary
         shell: bash
         run: |
@@ -35,6 +46,8 @@ jobs:
           node --check app.js
           node --check demo/data.js
           node --check demo/demo.js
+          node --check demo/import-engine.js
+          node tests/local-import.test.cjs
           node tests/demo.test.cjs
           python3 tests/verify_site.py
       - name: Configure Pages

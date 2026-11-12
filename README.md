@@ -7,9 +7,11 @@ A self-contained editorial case study and interactive sample of **Between the Li
 - **Home / case study:** https://btl.masynnay.com/
 - **Interactive reading room:** https://btl.masynnay.com/demo/
 
-The public demo offers two original short stories, a sample library, reading-progress controls, visible chapter boundaries, source-linked character dossiers, chronological relationship evidence, a question interface using authored citations and lexical matching, and ten coordinated themes.
+The C113 public demo adopts the private C111 reading workspace’s header, stopping-point controls, source tabs, signature violet-and-gold theme, and a real private-app screenshot while maintaining client-only PDF import. It includes source-linked Events, Places, Objects, Relationships, Recap, and Sources tabs. Details in [C113 parity notes](C113_PRIVATE_INTERFACE_PARITY.md).
 
-**Not included:** sign-in, PDF uploads, remote calls, production data, live Ollama inference, or any claims of verified general-purpose literary reasoning. The sample question tool is not an AI chatbot. Demo preferences and reading progress live in the browser's `localStorage` and can be reset with **Reset demo**.
+The public demo now prioritizes **private on-device PDF and text import**, genuine extracted text reading, page-linked literal search, conservative name review, reading-progress boundaries, and ten coordinated themes. Two original short stories remain as optional prepared examples with richer curated character and relationship demonstrations.
+
+**Not included:** sign-in, uploading documents to a server, live Ollama inference, production data, or any claims of verified general-purpose literary reasoning. PDF processing happens locally in the visitor browser using a self-hosted PDF.js build; scanned pages need OCR and cannot be indexed here. The question tool is literal passage search, not an AI chatbot. Demo preferences and reading progress live in the browser's `localStorage` and can be reset with **Reset demo**.
 
 ## Deploy on GitHub Pages
 
@@ -24,18 +26,18 @@ If the repo is created first and GitHub is connected to ChatGPT, the assistant c
 
 ## Safety and architecture
 
-- Static HTML, CSS and JavaScript. No build dependencies or runtime server.
-- A strict per-page Content Security Policy disallows external connections, remote scripts, forms and frames.
+- Static HTML, CSS and JavaScript. GitHub Actions installs a pinned Mozilla PDF.js build and bundles it locally for visitors; there is no application backend or document upload endpoint.
+- A strict per-page Content Security Policy disallows external connections, remote scripts, forms and frames. PDF parser and worker files are served from the same GitHub Pages origin.
 - All demonstration story text is original fiction, not an imported book.
 - `assets/app-reader.webp` and `assets/app-library.webp` are **labeled historical screenshots** from an older private development build; they are not screenshots of this new demo.
-- No accounts, API keys, uploads, analytics, or external requests.
+- No accounts, API keys, upload endpoint, analytics, or off-origin runtime requests. Uploaded document bytes and text stay in memory and are discarded on refresh.
 - **This is a showcase and a representative client-side product exercise**, not a public deployment of the full research engine.
 
 ## Local inspection
 
 Open `index.html` or serve this folder with `python3 -m http.server 8765` and navigate to `http://localhost:8765`. The demo runs at `/demo/`.
 
-`node tests/demo.test.cjs` runs the source-linked chapter-gating and interaction-state checks without needing a browser.
+`node tests/demo.test.cjs` and `node tests/local-import.test.cjs` run the source-linked chapter-gating and local import adapter checks without needing a browser. PDF.js is installed by the deployment workflow, not this checkout.
 
 ## Source confidentiality
 

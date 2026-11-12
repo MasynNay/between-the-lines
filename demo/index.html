@@ -1,48 +1,61 @@
 <!doctype html>
-<html lang="en" data-theme="porcelain">
+<html lang="en" data-theme="amethyst">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3ed">
   <meta name="description" content="Explore Between the Lines: a free, original-fiction interactive reading demo with spoiler-aware chapters, source-linked character notes and relationships.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="private-match.css">
   <script src="data.js" defer></script>
+  <script src="import-engine.js" defer></script>
   <script src="demo.js" defer></script>
   <title>Reading room · Between the Lines interactive demo</title>
 </head>
 <body>
 <a class="skip-link" href="#content">Skip to reading room</a>
+<header class="product-header">
+  <a class="product-brand" href="../" aria-label="Between the Lines portfolio home"><img src="../assets/private-logo.svg" width="48" height="48" alt=""><span><strong>Between the Lines</strong><small>READ · WATCH · REMEMBER</small></span></a>
+  <nav class="product-links" aria-label="Main navigation">
+    <button type="button" data-top-view="library">My library</button>
+    <button type="button" data-top-view="story">Reading room</button>
+    <button type="button" data-top-view="people">Characters</button>
+    <button type="button" data-top-view="evidence">Search</button>
+  </nav>
+  <div class="product-actions"><span class="browser-edition-tag">PUBLIC BROWSER EDITION</span><button type="button" class="product-utility product-theme" id="theme-launch" aria-label="Choose color theme">◐ <span>Theme</span></button><button type="button" class="product-utility" data-text-adjust="-1" aria-label="Decrease reading text size">A−</button><button type="button" class="product-utility" data-text-adjust="0" aria-label="Reset reading text size">A</button><button type="button" class="product-utility" data-text-adjust="1" aria-label="Increase reading text size">A+</button></div>
+</header>
 <div class="app-shell">
   <aside class="sidebar">
-    <a href="../" class="brand" aria-label="Between the Lines case study homepage">
-      <span class="brand-mark">B<span>✳</span>L</span><span class="brand-name">Between<br>the Lines<small>DEMONSTRATION ROOM</small></span>
-    </a>
-    <div class="sidebar-group-title">READING ROOM <span>01</span></div>
+    <div class="sidebar-reader-head"><span class="sidebar-overline">THE READING ROOM</span><strong>Your book, your place.</strong><p>Choose a title and where you stopped. The rest stays behind the spoiler boundary.</p></div>
+    <div id="sidebar-book-panel" class="sidebar-book-panel" aria-live="polite"></div>
+    <div class="sidebar-group-title">EXPLORE YOUR BOOK <span>01</span></div>
     <nav class="side-nav" aria-label="Demo sections">
-      <button type="button" data-view="library" class="nav-item active" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span> My library <span class="nav-index">01</span></button>
-      <button type="button" data-view="story" class="nav-item"><span class="nav-icon" aria-hidden="true">▤</span> Story guide <span class="nav-index">02</span></button>
-      <button type="button" data-view="people" class="nav-item"><span class="nav-icon" aria-hidden="true">♙</span> Characters <span class="nav-index">03</span></button>
-      <button type="button" data-view="relationships" class="nav-item"><span class="nav-icon" aria-hidden="true">◇</span> Relationships <span class="nav-index">04</span></button>
-      <button type="button" data-view="evidence" class="nav-item"><span class="nav-icon" aria-hidden="true">⌕</span> Ask the source <span class="nav-index">05</span></button>
+      <button type="button" data-view="library" class="nav-item active" aria-current="page"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="8" height="7" rx="1.5"/><rect x="13" y="4" width="8" height="7" rx="1.5"/><rect x="3" y="13" width="8" height="7" rx="1.5"/><rect x="13" y="13" width="8" height="7" rx="1.5"/></svg></span> My library <span class="nav-index">01</span></button>
+      <button type="button" data-view="story" class="nav-item"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Z"/><path d="M12 6v14"/></svg></span> Story guide <span class="nav-index">02</span></button>
+      <button type="button" data-view="people" class="nav-item"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 6a3 3 0 0 1 0 6m1 3a5 5 0 0 1 3 5"/></svg></span> Characters <span class="nav-index">03</span></button>
+      <button type="button" data-view="relationships" class="nav-item"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M7 6.5 11 17M17 6.5 13 17M7 5h10"/></svg></span> Relationships <span class="nav-index">04</span></button>
+      <button type="button" data-view="evidence" class="nav-item"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></span> Ask the source <span class="nav-index">05</span></button>
     </nav>
     <div class="sidebar-foot">
-      <div class="theme-field"><label for="theme-select">Room appearance</label><select id="theme-select" aria-label="Choose room appearance"><option value="porcelain">Porcelain</option><option value="graphite">Graphite</option><option value="warm-paper">Warm Paper</option><option value="pine">Pine</option><option value="sage">Sage</option><option value="night-sky">Night Sky</option><option value="frost">Frost</option><option value="deep-sea">Deep Sea</option><option value="sea-glass">Sea Glass</option><option value="amethyst">Amethyst</option></select></div>
-      <div class="sidebar-small"><span class="online-dot"></span> Browser only · No account<br><small>All demo stories are original fiction.</small></div>
+      <div class="theme-field"><label for="theme-select">Room appearance</label><select id="theme-select" aria-label="Choose Appearance"><option value="porcelain">Porcelain</option><option value="graphite">Graphite</option><option value="warm-paper">Warm Paper</option><option value="pine">Pine</option><option value="sage">Sage</option><option value="night-sky">Night Sky</option><option value="frost">Frost</option><option value="deep-sea">Deep Sea</option><option value="sea-glass">Sea Glass</option><option value="amethyst">Amethyst</option></select></div>
+      <div class="sidebar-small"><span class="online-dot"></span> On-device workspace · No account<br><small>Personal uploads stay on your device.</small></div>
       <a class="case-study-link" href="../">← View the case study</a>
     </div>
   </aside>
   <div class="main-column">
-    <div class="masthead"><span><span class="masthead-spark">✳</span> PRIVATE READING, PUBLIC EXAMPLE</span><div><span class="demo-kicker">SANDBOX EDITION</span><button type="button" class="button-outline small" id="reset-demo">Reset demo</button></div></div>
+    <div class="masthead"><span><span class="masthead-spark">✧</span> YOUR STORY, SO FAR.</span><div><span class="demo-kicker">SANDBOX EDITION</span><button type="button" class="button-outline small" id="reset-demo">Reset demo</button></div></div>
     <main id="content" tabindex="-1">
-      <div class="page-title-block"><div><p class="eyebrow" id="page-eyebrow">YOUR PERSONAL LIBRARY</p><h1 id="page-title">A place for every story<span class="accent-period">.</span></h1><p class="page-subtitle" id="page-description">An interactive, spoiler-aware reading experience. Choose a fictional book to begin.</p></div><div id="progress-summary" class="progress-summary" aria-live="polite"></div></div>
-      <div class="demo-notice" role="note"><span class="notice-glyph" aria-hidden="true">ⓘ</span><p><strong>This is an interactive public sample, not the full self-hosted application.</strong> It demonstrates its core ideas using two original fictional stories. Questions are answered from prepared source evidence, not a live AI model. No book uploads, accounts, or server requests.</p></div>
+      <div class="page-title-block"><div><p class="eyebrow" id="page-eyebrow">YOUR PERSONAL LIBRARY</p><h1 id="page-title">A place for every story<span class="accent-period">.</span></h1><p class="page-subtitle" id="page-description">Bring a real PDF or open an example. Your document never leaves this browser.</p></div><div id="progress-summary" class="progress-summary" aria-live="polite"></div></div>
+      <div class="demo-notice" role="note"><span class="notice-glyph" aria-hidden="true">ⓘ</span><p><strong>This is an interactive public sample, not the full self-hosted application.</strong> Import a PDF or text document for private, on-device reading and literal source search. This browser edition is not the full Ollama-powered application. Name suggestions require review; deeper AI analysis is unavailable. No account or private server.</p></div>
+      <nav id="workspace-tabs" class="workspace-tabs" aria-label="Reading guide sections"></nav>
       <div id="view-content" class="view-container" aria-live="off"></div>
     </main>
-    <footer class="app-footer"><span>BETWEEN THE LINES <span class="sep">/</span> PUBLIC INTERACTIVE SAMPLE</span><span>No external requests · No imported books · No sign-in</span></footer>
+    <footer class="app-footer"><span>BETWEEN THE LINES <span class="sep">/</span> PUBLIC INTERACTIVE SAMPLE</span><span>Documents processed in your browser · No sign-in · No home server</span></footer>
   </div>
 </div>
+<dialog id="theme-dialog" class="theme-dialog" aria-labelledby="theme-dialog-title"><div class="theme-dialog-header"><div><p class="tiny-label">PERSONALIZE YOUR READING ROOM</p><h2 id="theme-dialog-title">Choose your atmosphere</h2><p>Ten coordinated themes from the full application, adapted for this browser demo.</p></div><button type="button" class="button-outline" id="theme-close" aria-label="Close themes">Close ×</button></div><div class="theme-grid" id="theme-options" role="group" aria-label="Appearance themes"></div></dialog>
 <div class="toast" role="status" aria-live="polite" id="toast"></div>
 </body>
 </html>
