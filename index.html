@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" data-appearance="paper">
+<html lang="en" data-appearance="ink">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Meet Between the Lines: a private, local-first story intelligence app for books and TV. See what the complete Ollama-enabled installation adds beyond the free browser preview.">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f7f2e8">
+  <meta name="theme-color" content="#191724">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; font-src 'self'; form-action 'none'; object-src 'none'; base-uri 'none'">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Between the Lines — A story companion, built for the page you're on">
@@ -22,14 +22,26 @@
   <header class="site-header" id="top">
     <a class="wordmark" href="#top" aria-label="Between the Lines, go to top"><span class="brand-seal" aria-hidden="true">B<span>✳</span>L</span><span>Between<br>the Lines</span></a>
     <nav aria-label="On this page" class="main-nav"><a href="#local-edition">Full local app</a><a href="#edition-compare">Compare editions</a><a href="#experience">Real screenshots</a><a href="demo/">Browser preview</a><a href="#local-install">Getting started</a></nav>
-    <button class="appearance-toggle" id="appearance-toggle" type="button" aria-pressed="false" aria-label="Switch to ink theme"><span aria-hidden="true" class="moon-mark">◑</span><span id="appearance-label">Ink mode</span></button>
+    <button class="appearance-toggle" id="appearance-toggle" type="button" aria-pressed="false" aria-label="Switch to paper theme"><span aria-hidden="true" class="moon-mark">◑</span><span id="appearance-label">Paper mode</span></button>
   </header>
   <main id="main">
     <section class="hero section-wrap" aria-labelledby="hero-title">
       <div class="hero-meta"><span class="eyebrow"><span class="small-rule" aria-hidden="true"></span> LOCAL-FIRST STORY INTELLIGENCE</span><span class="micro index-tag">YOUR LIBRARY / YOUR MODEL / YOUR MACHINE</span></div>
       <div class="hero-grid">
         <div class="hero-copy"><h1 id="hero-title">A story<br>never <em>ahead</em><br>of you<span class="period">.</span></h1><p class="intro-copy">Your books, shows, characters and clues. <em>One private place to explore them.</em></p><p class="body-copy">The browser preview lets you explore the design and read your own PDF. <strong>The complete local installation is the real experience:</strong> a persistent library, book and TV guides, evidence-linked discoveries and optional on-device Ollama analysis, all under your control.</p><div class="hero-actions"><a class="action primary" href="#local-edition">Discover the full local app <span aria-hidden="true">↘</span></a><a class="action quiet" href="demo/">Try the limited browser preview <span aria-hidden="true">↗</span></a></div><p class="hero-difference"><span aria-hidden="true">✦</span> No home server is exposed to the public demo. The full installation runs privately on your own hardware.</p></div>
-        <figure class="hero-real-app"><div class="hero-app-meta"><span class="screen-live-dot" aria-hidden="true"></span> THE FULL LOCAL APPLICATION <span>ACTUAL DEVELOPMENT SCREENSHOT</span></div><div class="hero-app-image"><img src="assets/app-library.webp" width="1220" height="645" alt="An actual earlier build of the full Between the Lines application showing the local library and story workspace" fetchpriority="high"></div><figcaption><strong>Your stories have a home.</strong><span>Persistent private library · self-hosted workspace · optional local AI</span></figcaption><div class="hero-app-stamp">LOCAL<br>EDITION</div></figure>
+        <div class="hero-atlas" aria-label="Illustration of how Between the Lines follows connected story evidence without revealing future chapters">
+          <div class="atlas-top"><span class="atlas-top-rule" aria-hidden="true"></span> THE STORY, IN CONTEXT <span class="atlas-top-right">A READER'S CONSTELLATION</span></div>
+          <div class="atlas-stage" aria-hidden="true">
+            <div class="atlas-ring atlas-ring-outer"></div><div class="atlas-ring atlas-ring-inner"></div>
+            <div class="atlas-orbit-line orbit-one"></div><div class="atlas-orbit-line orbit-two"></div><div class="atlas-orbit-line orbit-three"></div>
+            <div class="atlas-center"><span class="atlas-center-mark">B<span>✳</span>L</span><span class="atlas-center-title">Every detail.<br>In its place.</span><span class="atlas-center-small">THE STORY REMAINS YOURS</span></div>
+            <div class="atlas-item atlas-item-one"><span>01 / CHARACTER</span><strong>Ada Vale</strong><small>Introduced · Chapter I</small></div>
+            <div class="atlas-item atlas-item-two"><span>02 / EVIDENCE</span><strong>The brass key</strong><small>Source linked · Chapter I</small></div>
+            <div class="atlas-item atlas-item-three"><span>03 / CONNECTION</span><strong>Rin Solis</strong><small>Observed · Chapter II</small></div>
+            <div class="atlas-locked"><span>✧</span> FUTURE CHAPTERS STAY CLOSED</div>
+          </div>
+          <div class="atlas-footer"><span><b class="atlas-status-dot"></b> CHAPTER-AWARE BY DESIGN</span><span>LOCAL APP / OPTIONAL OLLAMA</span></div>
+        </div>
       </div>
       <div class="hero-footer"><span>BOOKS &amp; TELEVISION</span><span>PDF · EPUB · TXT</span><span>10 THEMES</span><span>OPTIONAL OLLAMA</span></div>
     </section>
@@ -80,6 +92,6 @@
     </section>
     <section class="status section-wrap section-divider" id="status" aria-labelledby="status-title"><div class="chapter-label"><span>08</span><span>CURRENT CHAPTER</span></div><div class="status-grid"><div><p class="eyebrow">WHAT'S REAL, WHAT'S NEXT</p><h2 id="status-title">The real app is deeper.<br><em>The testing continues.</em></h2><p>The complete self-hosted application is still a private development build. The browser demo is a limited preview, not the place to evaluate full Ollama analysis or persistent research features. No public installer or hosted AI service is being offered yet.</p></div><div class="status-list"><div><span class="status-icon" aria-hidden="true">✓</span><div><strong>Implemented in the local app</strong><p>Private imports, book and TV shelves, reading-progress boundaries, evidence-linked notes, and ten UI themes.</p></div></div><div><span class="status-icon" aria-hidden="true">✓</span><div><strong>Public demo available</strong><p>Import a PDF or TXT privately in your browser, test chapter controls and ten themes, and explore prepared story examples without signing in. <a href="demo/">Open the demo</a>.</p></div></div><div><span class="status-icon pending" aria-hidden="true">○</span><div><strong>Still needs independent validation</strong><p>Real-model literary accuracy, long-session performance and secure internet-facing deployment are not certified.</p></div></div></div></div><div class="closing"><span class="eyebrow">A BETTER WAY TO REMEMBER</span><p>Get lost in a story.<br><em>Keep your place.</em></p><a href="#top" class="top-link">Back to the beginning <span aria-hidden="true">↑</span></a></div></section>
   </main>
-  <footer class="footer section-wrap"><div><strong>BETWEEN THE LINES</strong><span>READ / WATCH / REMEMBER</span></div><p>Product & engineering case study · This public showcase uses only original demo text and historical screenshots of the actual private application.</p><a href="#top">Top ↑</a></footer>
+  <footer class="footer section-wrap"><div><strong>BETWEEN THE LINES</strong><span>READ / WATCH / REMEMBER</span></div><p>Product & engineering case study · This public showcase uses only original demo text and historical screenshots of the actual private application.</p><a href="https://github.com/MasynNay/between-the-lines/blob/main/ROADMAP.md" target="_blank" rel="noopener noreferrer">Development roadmap ↗</a><a href="#top">Top ↑</a></footer>
 </body>
 </html>

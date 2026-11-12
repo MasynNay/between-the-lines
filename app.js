@@ -35,13 +35,13 @@ $('prev-chapter').addEventListener('click',()=>setChapter(chapter-1));
 $('next-chapter').addEventListener('click',()=>setChapter(chapter+1));
 setChapter(1);
 const toggle=$('appearance-toggle');
-const saved=(()=>{try{return localStorage.getItem('btl.case-study.appearance');}catch{return null;}})();
+const saved=(()=>{try{return localStorage.getItem('btl.case-study.appearance.v2');}catch{return null;}})();
 function setAppearance(mode){
   const isInk=mode==='ink';document.documentElement.dataset.appearance=isInk?'ink':'paper';
   toggle.setAttribute('aria-pressed',String(isInk));toggle.setAttribute('aria-label',isInk?'Switch to paper theme':'Switch to ink theme');
   $('appearance-label').textContent=isInk?'Paper mode':'Ink mode';
-  document.querySelector('meta[name="theme-color"]').content=isInk?'#151e22':'#f7f2e8';
-  try{localStorage.setItem('btl.case-study.appearance',isInk?'ink':'paper');}catch{}
+  document.querySelector('meta[name="theme-color"]').content=isInk?'#191724':'#f7f2e8';
+  try{localStorage.setItem('btl.case-study.appearance.v2',isInk?'ink':'paper');}catch{}
 }
-setAppearance(saved==='ink'?'ink':'paper');
+setAppearance(saved==='paper'?'paper':'ink');
 toggle.addEventListener('click',()=>setAppearance(document.documentElement.dataset.appearance==='ink'?'paper':'ink'));
