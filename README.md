@@ -1,6 +1,14 @@
 # Between the Lines — Public Demo & Portfolio
 
-A self-contained editorial case study and interactive sample of **Between the Lines**, an evidence-first, chapter-aware reading companion. **This repository contains the public showcase only.** The full private application, backend, imported books, account data, and Ollama service are intentionally absent.
+A public introduction to the full **Between the Lines** local story-intelligence application, plus a transparent and intentionally limited in-browser preview. **This repository contains the public showcase only.** The full private application, backend, imported books, account data, and Ollama service are intentionally absent.
+
+## The full local installation (private development edition)
+
+The main product is a self-hosted Node.js and Docker Compose workspace with a persistent private book and TV library, PDF/EPUB/TXT imports, chapter and episode-aware evidence scopes, characters, relationships, and source-linked observations. It includes ten themes and can optionally run Ollama locally to draft deeper interpretations. **Ollama output is experimental and should be checked against the source.**
+
+The public GitHub Pages demo is **not** the same as the local application. It has no persistent server library, no local model, no private account service, and no deep AI book comprehension. It supports browser-tab PDF/TXT imports and literal text search, plus curated fiction examples. Visitors never use the developer's home computing resources.
+
+**Availability:** the complete local installer is still a private development build. This public demo repository does not distribute the private source, app database, bundled install ZIP, or Ollama models. A public installable release should follow further security and independent model-accuracy review. Details are prominently presented on the website under **Full local app**, **Compare editions**, and **Getting started**.
 
 ## Explore
 

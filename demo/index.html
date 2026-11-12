@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3ed">
-  <meta name="description" content="Explore Between the Lines: a free, original-fiction interactive reading demo with spoiler-aware chapters, source-linked character notes and relationships.">
+  <meta name="description" content="Try the free browser preview of Between the Lines. The full local installation adds private libraries, book and TV research, evidence trails, and optional on-device Ollama analysis.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -24,7 +24,7 @@
     <button type="button" data-top-view="people">Characters</button>
     <button type="button" data-top-view="evidence">Search</button>
   </nav>
-  <div class="product-actions"><span class="browser-edition-tag">PUBLIC BROWSER EDITION</span><button type="button" class="product-utility product-theme" id="theme-launch" aria-label="Choose color theme">◐ <span>Theme</span></button><button type="button" class="product-utility" data-text-adjust="-1" aria-label="Decrease reading text size">A−</button><button type="button" class="product-utility" data-text-adjust="0" aria-label="Reset reading text size">A</button><button type="button" class="product-utility" data-text-adjust="1" aria-label="Increase reading text size">A+</button></div>
+  <div class="product-actions"><a class="browser-edition-tag browser-full-link" href="../#local-edition">SEE FULL LOCAL EDITION ↗</a><button type="button" class="product-utility product-theme" id="theme-launch" aria-label="Choose color theme">◐ <span>Theme</span></button><button type="button" class="product-utility" data-text-adjust="-1" aria-label="Decrease reading text size">A−</button><button type="button" class="product-utility" data-text-adjust="0" aria-label="Reset reading text size">A</button><button type="button" class="product-utility" data-text-adjust="1" aria-label="Increase reading text size">A+</button></div>
 </header>
 <div class="app-shell">
   <aside class="sidebar">
@@ -45,14 +45,14 @@
     </div>
   </aside>
   <div class="main-column">
-    <div class="masthead"><span><span class="masthead-spark">✧</span> YOUR STORY, SO FAR.</span><div><span class="demo-kicker">SANDBOX EDITION</span><button type="button" class="button-outline small" id="reset-demo">Reset demo</button></div></div>
+    <div class="masthead"><span><span class="masthead-spark">✧</span> YOUR STORY, SO FAR.</span><div><a class="demo-kicker demo-local-link" href="../#edition-compare">Preview vs full app ↗</a><button type="button" class="button-outline small" id="reset-demo">Reset demo</button></div></div>
     <main id="content" tabindex="-1">
       <div class="page-title-block"><div><p class="eyebrow" id="page-eyebrow">YOUR PERSONAL LIBRARY</p><h1 id="page-title">A place for every story<span class="accent-period">.</span></h1><p class="page-subtitle" id="page-description">Bring a real PDF or open an example. Your document never leaves this browser.</p></div><div id="progress-summary" class="progress-summary" aria-live="polite"></div></div>
-      <div class="demo-notice" role="note"><span class="notice-glyph" aria-hidden="true">ⓘ</span><p><strong>This is an interactive public sample, not the full self-hosted application.</strong> Import a PDF or text document for private, on-device reading and literal source search. This browser edition is not the full Ollama-powered application. Name suggestions require review; deeper AI analysis is unavailable. No account or private server.</p></div>
+      <section class="demo-upgrade" aria-labelledby="upgrade-title"><div class="upgrade-top"><span class="upgrade-tag">YOU ARE EXPLORING THE BROWSER PREVIEW</span><span class="upgrade-mark" aria-hidden="true">✳</span></div><div class="upgrade-body"><div><h2 id="upgrade-title">This is the preview. <em>The real story starts locally.</em></h2><p>Import a PDF here for private, browser-only reading and literal search. With the <strong>full local installation</strong>, you gain a lasting library, book and TV guides, source-linked character and relationship analysis, and the option to use <strong>Ollama on your own computer</strong> for deeper draft insights.</p><div class="upgrade-tags"><span>Saved book &amp; TV library</span><span>PDF · EPUB · TXT</span><span>Evidence trails</span><span>Optional local Ollama</span></div></div><a class="upgrade-link" href="../#local-edition">Explore the complete local app <span aria-hidden="true">↗</span></a></div><p class="upgrade-fineprint">This public version does not run AI or store your books on a server. Name suggestions and text matches are not verified conclusions. Ollama results in the local edition also require source checking.</p></section>
       <nav id="workspace-tabs" class="workspace-tabs" aria-label="Reading guide sections"></nav>
       <div id="view-content" class="view-container" aria-live="off"></div>
     </main>
-    <footer class="app-footer"><span>BETWEEN THE LINES <span class="sep">/</span> PUBLIC INTERACTIVE SAMPLE</span><span>Documents processed in your browser · No sign-in · No home server</span></footer>
+    <footer class="app-footer"><span>BETWEEN THE LINES <span class="sep">/</span> PUBLIC INTERACTIVE SAMPLE</span><span>Preview only · <a href="../#edition-compare">See what full local installation adds ↗</a> · No home server</span></footer>
   </div>
 </div>
 <dialog id="theme-dialog" class="theme-dialog" aria-labelledby="theme-dialog-title"><div class="theme-dialog-header"><div><p class="tiny-label">PERSONALIZE YOUR READING ROOM</p><h2 id="theme-dialog-title">Choose your atmosphere</h2><p>Ten coordinated themes from the full application, adapted for this browser demo.</p></div><button type="button" class="button-outline" id="theme-close" aria-label="Close themes">Close ×</button></div><div class="theme-grid" id="theme-options" role="group" aria-label="Appearance themes"></div></dialog>

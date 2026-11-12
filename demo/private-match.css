@@ -147,3 +147,25 @@ body{background:radial-gradient(ellipse at 80% -20%,color-mix(in srgb,var(--acce
 .theme-choice strong{font-size:.84rem}.theme-choice small{font-size:.69rem;color:var(--muted)}
 .theme-selected{grid-column:2;font-size:.65rem;color:var(--accent);font-weight:750;min-height:15px}
 @media(max-width:700px){.product-theme span{display:none}.product-theme{min-width:33px;margin-right:2px}.theme-grid{grid-template-columns:1fr}.theme-dialog{padding:17px}}
+
+
+/* C114 — Full-installation value visible inside the limited browser workspace. */
+.browser-full-link{color:#f4e3b9!important;text-decoration:none;border:1px solid #b9a478!important;border-radius:8px;padding:8px 13px;font-size:.65rem!important;white-space:nowrap}
+.browser-full-link:hover,.browser-full-link:focus-visible{background:#46395d!important;color:white!important}
+.demo-local-link{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.demo-upgrade{margin:22px 0 25px;background:linear-gradient(120deg,#251c3e 0%,#352548 70%,#473259 100%);border:1px solid #8b71a1;border-radius:14px;color:#f5effa;box-shadow:0 12px 30px #11081e21;overflow:hidden}
+.upgrade-top{padding:13px 23px 9px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #735786;color:#e9ca9b;font-size:.62rem;letter-spacing:.12em;font-weight:800}
+.upgrade-mark{font-size:1.5rem;line-height:1}
+.upgrade-body{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;padding:21px 23px}
+.upgrade-body h2{font:normal clamp(1.6rem,2.4vw,2.4rem)/1.1 Georgia,'Times New Roman',serif;letter-spacing:-.045em;margin:0 0 12px}
+.upgrade-body h2 em{color:#ecd1a5}
+.upgrade-body p{max-width:830px;color:#ddd1e7;font-size:.84rem;line-height:1.7;margin:0}
+.upgrade-body p strong{color:white}
+.upgrade-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.upgrade-tags span{font-size:.63rem;padding:5px 9px;background:#ffffff10;border:1px solid #8e739e;color:#e8d8f3;border-radius:7px}
+.upgrade-link{display:flex;justify-content:center;align-items:center;gap:14px;min-width:182px;max-width:240px;border-radius:9px;padding:14px 17px;text-decoration:none;background:#f0cf9d;color:#261c32;font-size:.76rem;font-weight:800;line-height:1.4;transition:background .15s,transform .15s}
+.upgrade-link:hover{background:#fff0cd;transform:translateY(-2px)}
+.upgrade-fineprint{margin:0;border-top:1px solid #735786;padding:12px 23px;color:#c4b8d1;font-size:.71rem;line-height:1.6}
+.app-footer a{color:inherit}
+@media(max-width:950px){.upgrade-body{grid-template-columns:1fr}.upgrade-link{max-width:340px}.browser-full-link{padding:6px 9px}}
+@media(max-width:550px){.upgrade-top,.upgrade-body,.upgrade-fineprint{padding-left:14px;padding-right:14px}.upgrade-link{width:100%;max-width:100%}.upgrade-tags span{font-size:.59rem}}
