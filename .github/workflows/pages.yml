@@ -1,0 +1,48 @@
+name: Publish Between the Lines public demo
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the public site
+        uses: actions/checkout@v4
+      - name: Check demo assets and privacy boundary
+        shell: bash
+        run: |
+          test -f index.html
+          test -f demo/index.html
+          test -f demo/data.js
+          test -f demo/demo.js
+          test -f CNAME
+          test "$(cat CNAME)" = 'btl.masynnay.com'
+          if find . -type f \( -iname '*.pdf' -o -iname '*.sqlite*' -o -iname '*.db' -o -iname '*.env' -o -iname '*.zip' -o -iname '*.gguf' \) | grep .; then
+            echo 'Private application asset in public site' >&2
+            exit 1
+          fi
+          node --check app.js
+          node --check demo/data.js
+          node --check demo/demo.js
+          node tests/demo.test.cjs
+          python3 tests/verify_site.py
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload public site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

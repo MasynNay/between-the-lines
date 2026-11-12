@@ -1,0 +1,11 @@
+*.sqlite
+*.sqlite3
+*.db
+*.pdf
+*.gguf
+*.env
+.env.*
+node_modules/
+.DS_Store
+__pycache__/
+*.zip
