@@ -9,6 +9,7 @@
 - In-memory imported document removal, including a visible library control and per-document sidebar action.
 - Reset now clears all imports from the active tab; an in-progress import can be cancelled without adding a late result.
 - 40 MiB upload-size limit, 800-PDF-page limit, 8 MiB extracted-text limit, and actionable messages for invalid, password-protected, empty, or image-only documents.
+- GitHub Pages pipeline now separates artifact upload (`build`) from publication (`deploy`) to prevent the single-job artifact-discovery race on initial publication.
 - No uploaded book data added to this release. Static website continues to have no connection to home computers or private Ollama services.
 
 ## Test evidence
