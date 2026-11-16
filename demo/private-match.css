@@ -169,3 +169,14 @@ body{background:radial-gradient(ellipse at 80% -20%,color-mix(in srgb,var(--acce
 .app-footer a{color:inherit}
 @media(max-width:950px){.upgrade-body{grid-template-columns:1fr}.upgrade-link{max-width:340px}.browser-full-link{padding:6px 9px}}
 @media(max-width:550px){.upgrade-top,.upgrade-body,.upgrade-fineprint{padding-left:14px;padding-right:14px}.upgrade-link{width:100%;max-width:100%}.upgrade-tags span{font-size:.59rem}}
+/* C116 — make source-page navigation and privacy controls obvious. */
+.imported-card-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:15px}
+.imported-card-actions .button-outline{min-height:42px}
+.page-jump-form{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin:18px 0;padding:15px 17px;background:var(--panel);border:1px solid var(--line);border-radius:11px}
+.page-jump-form label{flex-basis:100%;font-size:.78rem;font-weight:750;color:var(--ink)}
+.page-jump-form input{width:110px;max-width:100%;border-radius:8px;border:1px solid var(--line-strong);background:var(--soft);color:var(--ink);padding:8px 12px;min-height:42px;font:inherit}
+.page-jump-form small{color:var(--muted);font-size:.72rem;align-self:center}
+.page-jump-form button{min-height:42px}
+.source-reading-text{white-space:pre-wrap;overflow-wrap:anywhere}
+#view-content button:disabled{filter:none!important;cursor:not-allowed}
+@media(max-width:620px){.page-jump-form small{flex-basis:100%}.reader-next-actions{display:flex;flex-wrap:wrap;gap:8px}.reader-next-actions>button{flex:1 1 135px}}

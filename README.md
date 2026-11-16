@@ -17,9 +17,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 - **Home / case study:** https://btl.masynnay.com/
 - **Interactive reading room:** https://btl.masynnay.com/demo/
 
-The C113 public demo adopts the private C111 reading workspace’s header, stopping-point controls, source tabs, signature violet-and-gold theme, and a real private-app screenshot while maintaining client-only PDF import. It includes source-linked Events, Places, Objects, Relationships, Recap, and Sources tabs. Details in [C113 parity notes](C113_PRIVATE_INTERFACE_PARITY.md).
+The public browser demo adopts the private C111 reading workspace’s header, stopping-point controls, source tabs, signature violet-and-gold theme, and a real private-app screenshot while maintaining client-only PDF import. It includes source-linked Events, Places, Objects, Relationships, Recap, and Sources tabs. Details in [C113 parity notes](C113_PRIVATE_INTERFACE_PARITY.md).
 
-The public demo now prioritizes **private on-device PDF and text import**, genuine extracted text reading, page-linked literal search, conservative name review, reading-progress boundaries, and ten coordinated themes. Two original short stories remain as optional prepared examples with richer curated character and relationship demonstrations.
+The public demo now prioritizes **private on-device PDF and text import**, source-page reading, exact-PDF-page literal search links, explicit import removal/cancellation, conservative name review, spoiler-aware stopping points, and ten coordinated themes. Imported books stay in this tab only: reset or remove one to clear its text from the current session. Two original short stories remain as optional prepared examples with richer curated character and relationship demonstrations.
 
 **Not included:** sign-in, uploading documents to a server, live Ollama inference, production data, or any claims of verified general-purpose literary reasoning. PDF processing happens locally in the visitor browser using a self-hosted PDF.js build; scanned pages need OCR and cannot be indexed here. The question tool is literal passage search, not an AI chatbot. Demo preferences and reading progress live in the browser's `localStorage` and can be reset with **Reset demo**.
 
@@ -47,7 +47,7 @@ If the repo is created first and GitHub is connected to ChatGPT, the assistant c
 
 Open `index.html` or serve this folder with `python3 -m http.server 8765` and navigate to `http://localhost:8765`. The demo runs at `/demo/`.
 
-`node tests/demo.test.cjs` and `node tests/local-import.test.cjs` run the source-linked chapter-gating and local import adapter checks without needing a browser. PDF.js is installed by the deployment workflow, not this checkout.
+`node tests/demo.test.cjs`, `node tests/local-import.test.cjs`, and `node tests/privacy-workflow.test.cjs` run the source-linked chapter-gating, exact-page navigation, removal, cancellation, and local import checks without needing a browser. `python3 tests/browser_smoke.py` optionally checks the actual DOM in isolated Chromium at desktop and mobile sizes if Playwright and Chromium are installed; it does not run a production PDF.js worker or verify the hosted domain. PDF.js is installed by the deployment workflow, not this checkout.
 
 ## Source confidentiality
 

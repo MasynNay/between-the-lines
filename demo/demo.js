@@ -11,7 +11,7 @@
   const state = {
     storyId: stories.some(s=>s.id===stored.storyId) ? stored.storyId : stories[0].id,
     progress: Object.fromEntries(stories.map(s=>[s.id, Math.max(1, Math.min(s.chapters.length, Number.isInteger(stored.progress?.[s.id]) ? stored.progress[s.id] : 1))])),
-    view:'library', localExpanded:false, importing:false, importMessage:'', theme: themes.has(stored.theme) && stored.themeVersion===2 ? stored.theme : 'amethyst',
+    view:'library', localExpanded:false, importing:false, importMessage:'', activePage:1, theme: themes.has(stored.theme) && stored.themeVersion===2 ? stored.theme : 'amethyst',
     person:null, query:'', answer:null, highlight:null
   };
   const themeNames=[['amethyst','Amethyst','Signature reading room','#29233a','#f0c994'],['graphite','Graphite','Calm dark neutrals','#20252a','#bad1e0'],['porcelain','Porcelain','Quiet and bright','#f7f9fb','#35546a'],['warm-paper','Warm Paper','Warm archival pages','#f2ebdd','#4b6172'],['pine','Pine','Deep forest','#222e27','#b9d2b2'],['sage','Sage','Light woodland','#e6f0e6','#365f48'],['night-sky','Night Sky','Ink blue','#1b2941','#b0c9f3'],['frost','Frost','Cool daylight','#e8f0fa','#315d93'],['deep-sea','Deep Sea','Dark ocean','#1b3339','#91e0d8'],['sea-glass','Sea Glass','Coastal quiet','#e0f1ef','#1b6972']];
@@ -32,14 +32,18 @@
   function fmtChapter(n){return `CHAPTER ${roman[n-1] || n}`;}
   function sectionLabel(n){return story().local?`SECTION ${n}`:fmtChapter(n);}
   function setTheme(t){if(!themes.has(t)) return; state.theme=t;document.documentElement.dataset.theme=t; qs('#theme-select').value=t;persist();const options=qs('#theme-options');if(options)for(const b of qsa('[data-theme-choice]',options))b.setAttribute('aria-pressed',b.dataset.themeChoice===t?'true':'false');}
-  function openStory(id){if(!stories.some(s=>s.id===id))return;state.storyId=id;state.person=null;state.answer=null;state.highlight=null;persist();navigate('story');}
+  function openStory(id){if(!stories.some(s=>s.id===id))return;state.storyId=id;state.person=null;state.answer=null;state.highlight=null;state.activePage=1;persist();navigate('story');}
   function navigate(v,focusTitle=false){if(!viewTitles[v])return;state.view=v;state.highlight=null;render();if(focusTitle){qs('#page-title').focus();}}
-  function changeProgress(n){const s=story();if(!Number.isInteger(n)||n<1||n>s.chapters.length)return;state.progress[s.id]=n; state.answer=null;state.localExpanded=false;persist();render();}
+  function changeProgress(n){const s=story();if(!Number.isInteger(n)||n<1||n>s.chapters.length)return;state.progress[s.id]=n; state.answer=null;state.localExpanded=false;if(s.local)state.activePage=s.chapters[n-1].fromPage;persist();render();}
+  function goToPage(n){const s=story();if(!s.local||!Number.isInteger(n))return;const max=s.chapters[progress()-1].toPage;if(n<1||n>max){toast(`Only pages 1–${max} are available through your stopping point.`);return;}state.activePage=n;navigate('story',true);qs('.source-reading-page')?.scrollIntoView({block:'start',behavior:'auto'});}
+  function removeImported(id){const index=stories.findIndex(x=>x.id===id&&x.local);if(index===-1)return;const removed=stories.splice(index,1)[0];delete state.progress[id];if(state.storyId===id){state.storyId=stories[0].id;state.activePage=1;}state.person=null;state.answer=null;state.query='';state.importMessage=`${removed.title} removed from this tab. The file is not saved on a server.`;persist();navigate('library');toast('Imported document cleared from this tab');}
   const readingTabs=[['story','Overview'],['people','Characters'],['events','Events'],['places','Places'],['objects','Objects'],['relationships','Relationships'],['recap','Recap'],['evidence','Sources']];
   let readerSize=100;
+  let importToken=0;
+  const MAX_EXTRACTED_CHARACTERS=8*1024*1024;
   function renderSidebar(){
     const s=story(), p=progress(), el=qs('#sidebar-book-panel'); if(!el)return;
-    el.innerHTML=`<label for="sidebar-story">Selected title</label><select id="sidebar-story">${stories.map(b=>`<option value="${esc(b.id)}" ${b.id===s.id?'selected':''}>${esc(b.title)}</option>`).join('')}</select><div class="sidebar-selected"><span>${s.local?'YOUR PRIVATE DOCUMENT':'CURATED DEMO GUIDE'}</span><strong>${esc(s.title)}</strong><small>${s.local?`${s.pages.length} original PDF pages`:`${s.chapters.length} sample chapters`}</small></div><label for="sidebar-position">Last ${s.local?'section':'chapter'} completed</label><select id="sidebar-position">${s.chapters.map((c,i)=>`<option value="${i+1}" ${i+1===p?'selected':''}>${s.local?'Section':'Chapter'} ${i+1}</option>`).join('')}</select><p class="sidebar-hint">Only source material through your selected reading point is available.</p><button type="button" class="sidebar-open" data-sidebar-read>Open my compendium →</button><button type="button" class="sidebar-secondary" data-sidebar-import>Upload a book (PDF or TXT) ↑</button>`;
+    el.innerHTML=`<label for="sidebar-story">Selected title</label><select id="sidebar-story">${stories.map(b=>`<option value="${esc(b.id)}" ${b.id===s.id?'selected':''}>${esc(b.title)}</option>`).join('')}</select><div class="sidebar-selected"><span>${s.local?'YOUR PRIVATE DOCUMENT':'CURATED DEMO GUIDE'}</span><strong>${esc(s.title)}</strong><small>${s.local?`${s.pages.length} original PDF pages`:`${s.chapters.length} sample chapters`}</small></div><label for="sidebar-position">Last ${s.local?'section':'chapter'} completed</label><select id="sidebar-position">${s.chapters.map((c,i)=>`<option value="${i+1}" ${i+1===p?'selected':''}>${s.local?'Section':'Chapter'} ${i+1}</option>`).join('')}</select><p class="sidebar-hint">Only source material through your selected reading point is available.</p><button type="button" class="sidebar-open" data-sidebar-read>Open my compendium →</button><button type="button" class="sidebar-secondary" data-sidebar-import>Upload a book (PDF or TXT) ↑</button>${s.local?`<button type="button" class="sidebar-secondary" data-remove-story="${esc(s.id)}">Remove this imported book ×</button>`:''}`;
   }
   function renderGuideTabs(){
     const el=qs('#workspace-tabs');if(!el)return;
@@ -80,10 +84,10 @@
     const cards=sample.map(s=>`<button type="button" class="sample-tile" data-open-story="${s.id}"><span class="sample-book-glyph" aria-hidden="true">${s.id==='archive'?'A':'O'}</span><span><small>${esc(s.genre)}</small><strong>${esc(s.title)}</strong><em>${esc(s.subtitle)}</em></span><span aria-hidden="true">↗</span></button>`).join('');
     return `<section aria-label="Your reading library" class="library-scene">
       <div class="import-hero"><div class="import-hero-copy"><p class="tiny-label">THE REAL WORKSPACE · PRIVATE BROWSER EDITION</p><h2>Bring your own <em>story.</em></h2><p class="import-lead">Choose a PDF from your computer. Read it, find passages, follow your place, and review evidence inside a proper library. No demo account and no connection to anyone's home server.</p>
-      <div class="import-actions"><input id="book-upload" type="file" accept=".pdf,.txt,application/pdf,text/plain" aria-label="Import a PDF or text document" hidden><button type="button" class="button-primary import-button" data-import-trigger>Import PDF or text <span aria-hidden="true">↗</span></button><span class="file-limit">Up to 40 MB · Selectable text only</span></div>
+      <div class="import-actions"><input id="book-upload" type="file" accept=".pdf,.txt,application/pdf,text/plain" aria-label="Import a PDF or text document" hidden><button type="button" class="button-primary import-button" data-import-trigger ${state.importing?'disabled':''}>Import PDF or text <span aria-hidden="true">↗</span></button>${state.importing?'<button type="button" class="button-outline" data-cancel-import>Cancel import</button>':''}<span class="file-limit">Up to 40 MB · 800 PDF pages · Selectable text only</span></div>
       <p class="import-privacy">Your document is processed locally, stays in this browser tab, and disappears when you close or refresh it. Nothing gets sent to Aang, Korra, or an AI service.</p><div id="import-status" class="import-status" role="status" aria-live="polite">${esc(state.importMessage)}</div></div>
       <div class="import-preview" aria-label="Screenshot of the private Between the Lines reader"><div class="real-product-shot"><div class="shot-bar"><span class="shot-indicator"></span> INSIDE THE PRIVATE APPLICATION</div><img src="../assets/app-reader.webp" alt="Actual private Between the Lines reading room with chapter controls and source reference tabs" loading="lazy"><div class="shot-caption">The real reader, reimagined for the browser with local files</div></div></div></div>
-      ${local.length?`<div class="section-label"><span>YOUR PRIVATE DOCUMENTS</span><span>${local.length} OPEN IN THIS TAB</span></div><div class="imported-shelf">${local.map(b=>`<article class="imported-card"><div class="imported-cover" aria-hidden="true"><span>BTL</span><strong>${esc(b.title.slice(0,36))}</strong><small>PRIVATE PDF</small></div><div><p class="tiny-label">LOCALLY IMPORTED · ${b.pages.length} PAGES</p><h3>${esc(b.title)}</h3><p>Searchable text, an indexed reading place and source-linked name suggestions.</p><button class="button-primary" data-open-story="${b.id}">Continue reading <span aria-hidden="true">→</span></button></div></article>`).join('')}</div>`:''}
+      ${local.length?`<div class="section-label"><span>YOUR PRIVATE DOCUMENTS</span><span>${local.length} OPEN IN THIS TAB</span></div><div class="imported-shelf">${local.map(b=>`<article class="imported-card"><div class="imported-cover" aria-hidden="true"><span>BTL</span><strong>${esc(b.title.slice(0,36))}</strong><small>PRIVATE PDF</small></div><div><p class="tiny-label">LOCALLY IMPORTED · ${b.pages.length} PAGES</p><h3>${esc(b.title)}</h3><p>Searchable text, an indexed reading place and source-linked name suggestions.</p><div class="imported-card-actions"><button type="button" class="button-primary" data-open-story="${esc(b.id)}">Continue reading <span aria-hidden="true">→</span></button><button type="button" class="button-outline" data-remove-story="${esc(b.id)}">Remove book ×</button></div></div></article>`).join('')}</div>`:''}
       <div class="feature-pulse"><div><span class="feature-symbol">01</span><h3>A real document</h3><p>Use your own PDF rather than being stuck with two artificial sample stories.</p></div><div><span class="feature-symbol">02</span><h3>Your place, protected</h3><p>Keep later sections behind your chosen reading progress.</p></div><div><span class="feature-symbol">03</span><h3>Verify every claim</h3><p>Search exact passages and review suggestions instead of trusting invented facts.</p></div></div>
       <details class="sample-drawer"><summary>Prefer to explore without a PDF? <strong>Open sample stories</strong><span aria-hidden="true">＋</span></summary><div class="sample-list">${cards}</div><p class="sample-hint">The short original stories are optional. They demonstrate curated character and relationship examples; imported PDFs offer real-text reading and search without cloud AI.</p></details>
     </section>`;
@@ -91,7 +95,7 @@
   function storyPicker(){return `<div class="story-selector"><label for="story-pick">Reading</label><select id="story-pick">${stories.map(s=>`<option value="${s.id}" ${s.id===state.storyId?'selected':''}>${esc(s.title)}</option>`).join('')}</select></div>`;}
   function progressControls(){const s=story(),p=progress();return `<div class="chapter-progress-widget"><div class="chapter-progress-title"><span>LAST COMPLETED CHAPTER</span><strong>${fmtChapter(p)} <span>/ ${s.chapters.length}</span></strong></div><div class="chapter-buttons" role="group" aria-label="Set reading progress">${s.chapters.map((c,i)=>`<button type="button" class="chapter-button ${i+1===p?'current':''} ${i+1<p?'finished':''}" aria-label="Mark through chapter ${i+1}" aria-pressed="${p===i+1}" data-set-progress="${i+1}">${roman[i]}</button>`).join('')}</div><div class="progress-arrows"><button class="button-outline" data-set-progress="${p-1}" ${p===1?'disabled':''}>← Earlier point</button><button class="button-primary" data-set-progress="${p+1}" ${p===s.chapters.length?'disabled':''}>Finish next chapter →</button></div></div>`;}
   function renderStory(){const s=story(),p=progress();if(s.local)return renderImportedStory(s,p);return `<section aria-label="Story guide"><div class="reading-header"><div><p class="tiny-label">READING NOW / ${esc(s.genre)}</p><h2>${esc(s.title)}</h2><p>${esc(s.subtitle)}</p></div>${storyPicker()}</div>${progressControls()}<div class="section-label"><span>VERIFIED FROM THE SOURCE</span><span>CHAPTERS THROUGH ${roman[p-1]}</span></div><div class="chapter-feed">${s.chapters.map((c,i)=>i<p?`<article id="chapter-${i+1}" class="chapter-open"><div class="chapter-stamp"><span>${roman[i]}</span><small>READ</small></div><div class="chapter-copy"><p class="tiny-label">${fmtChapter(i+1)}</p><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p><div class="chapter-bottom">${s.evidence.filter(e=>e.chapter===i+1).length} source-linked observations · <button class="text-button" data-view-inline="evidence">See evidence →</button></div></div></article>`:`<article class="chapter-locked" aria-label="Chapter ${i+1} is unavailable"><div class="chapter-stamp"><span>${roman[i]}</span><small>LOCKED</small></div><div><span class="locked-heading">Chapter ${roman[i]}</span><p>This chapter’s title, text, characters and clues stay hidden.</p></div><span class="lock-badge" aria-hidden="true">✳</span></article>`).join('')}</div><div class="bottom-note">Only the chapters you choose to finish are used by the Characters, Relationships and Ask the source sections.</div></section>`;}
-  function sourceCard(e,mini=false){return `<article class="source-card ${mini?'source-mini':''}"><div class="source-card-top"><span class="tiny-label">${fmtChapter(e.chapter)} · ${esc(e.category)}</span><span class="status-chip ${e.status==='Reported by a character'?'reported':''}">${esc(e.status)}</span></div><h3>${esc(e.headline)}</h3><p>${esc(e.note)}</p><blockquote>${esc(e.quote)}</blockquote><button class="button-outline source-jump" data-source-chapter="${e.chapter}">Read the original chapter ↗</button></article>`;}
+  function sourceCard(e,mini=false){return `<article class="source-card ${mini?'source-mini':''}"><div class="source-card-top"><span class="tiny-label">${fmtChapter(e.chapter)} · ${esc(e.category)}</span><span class="status-chip ${e.status==='Reported by a character'?'reported':''}">${esc(e.status)}</span></div><h3>${esc(e.headline)}</h3><p>${esc(e.note)}</p><blockquote>${esc(e.quote)}</blockquote><button class="button-outline source-jump" ${e.page?`data-source-page="${e.page}"`:`data-source-chapter="${e.chapter}"`}>${e.page?`Open PDF page ${e.page} ↗`:'Read the original chapter ↗'}</button></article>`;}
   function renderPeople(){const s=story(),p=progress();if(s.local)return renderImportedPeople(s,p);const visible=s.people.filter(c=>c.first<=p);const sel=visible.find(c=>c.id===state.person)||visible[0];state.person=sel?.id;
     return `<section aria-label="Characters"><div class="workspace-header"><div><p class="tiny-label">SOURCE FIRST / ${esc(s.title)}</p><h2>${visible.length} people in your completed chapters</h2><p>Descriptions never claim details from unopened chapters.</p></div>${storyPicker()}</div><div class="people-layout"><div class="people-list"><div class="section-label"><span>CHARACTER INDEX</span><span>${visible.length} RECORDS</span></div>${visible.map(c=>`<button type="button" class="person-row ${sel.id===c.id?'selected':''}" aria-pressed="${sel.id===c.id}" data-person="${c.id}"><span class="person-monogram">${esc(c.name.split(' ').map(x=>x[0]).join(''))}</span><span><strong>${esc(c.name)}</strong><small>First noted: ${fmtChapter(c.first)}</small></span><span aria-hidden="true">→</span></button>`).join('')}</div>
     <div class="person-detail"><p class="tiny-label">CHARACTER DOSSIER / EVIDENCE VISIBLE</p><h2>${esc(sel.name)}</h2><span class="character-role">${esc(sel.role)}</span><p class="character-description">${esc(sel.description)}</p><div class="section-label"><span>SOURCE-LINKED APPEARANCES</span><span>${s.evidence.filter(e=>e.chapter<=p&&e.people.includes(sel.id)).length} ENTRIES</span></div><div class="sources-stack">${s.evidence.filter(e=>e.chapter<=p&&e.people.includes(sel.id)).map(e=>sourceCard(e,true)).join('')||'<p class="empty-note">No source observations yet.</p>'}</div></div></div></section>`;}
@@ -121,15 +125,18 @@
     return `<section class="recap-section"><div class="workspace-header"><div><p class="tiny-label">YOUR STORY, SO FAR</p><h2>At your stopping point.</h2><p>${s.local?'The excerpt below is copied from your own PDF, not rewritten or analyzed by AI.':'A chronological set of authored, source-linked observations, not an AI-generated recap.'}</p></div>${storyPicker()}</div><div class="recap-status"><strong>${esc(s.title)}</strong><span>${p} / ${s.chapters.length} ${s.local?'sections':'chapters'} unlocked</span></div><div class="recap-grid">${cards}</div></section>`;
   }
   function renderImportedStory(s,p) {
-    const section=s.chapters[p-1];
-    const length=s.chapters.length;
-    const text=state.localExpanded?section.text:section.text.slice(0,10000);
+    const section=s.chapters[p-1], length=s.chapters.length;
+    const unlocked=section.toPage;
+    const pageNumber=Math.min(Math.max(1,state.activePage||section.fromPage),unlocked);
+    const page=s.pages[pageNumber-1];
+    const text=page?.text||'';
     return `<section aria-label="Imported document reader" class="imported-reader">
       <div class="reading-header"><div><p class="tiny-label">YOUR PRIVATE DOCUMENT / SOURCE TEXT</p><h2>${esc(s.title)}</h2><p>${s.pages.length} pages · processed on your device · no AI interpretation</p></div>${storyPicker()}</div>
-      <div class="import-reader-toolbar"><div><label for="local-section">Reading position</label><select id="local-section">${s.chapters.map((c,i)=>`<option value="${i+1}" ${i+1===p?'selected':''}>Section ${i+1} · ${esc(c.title)}</option>`).join('')}</select></div><div class="progress-arrows"><button class="button-outline" data-set-progress="${p-1}" ${p===1?'disabled':''}>← Previous</button><button class="button-primary" data-set-progress="${p+1}" ${p===length?'disabled':''}>Next section →</button></div></div>
-      <div class="import-reader-progress"><span>YOUR STOPPING POINT</span><strong>${p} of ${length} sections</strong><div class="import-progress-track"><span style="width:${Math.round(p/length*100)}%"></span></div></div>
-      <article class="source-reading-page"><div class="source-reading-header"><div><p class="tiny-label">SECTION ${p} / DOCUMENT SOURCE</p><h3>${esc(section.title)}</h3></div><span>PDF TEXT</span></div><div class="source-reading-text">${esc(text)}</div>${!state.localExpanded&&section.text.length>10000?`<button type="button" class="button-outline read-more" data-expand-import>Read the rest of these pages ↓</button>`:''}<p class="source-reading-caption">Extracted text may lose complex layouts. This is source text from your file, not an AI-generated summary.</p></article>
-      <div class="reader-next-actions"><button class="button-outline" data-view-inline="evidence">Search the source ↗</button><button class="button-primary" data-set-progress="${p+1}" ${p===length?'disabled':''}>Continue reading →</button></div>
+      <div class="import-reader-toolbar"><div><label for="local-section">Last completed section</label><select id="local-section">${s.chapters.map((c,i)=>`<option value="${i+1}" ${i+1===p?'selected':''}>Section ${i+1} · ${esc(c.title)}</option>`).join('')}</select></div><div class="progress-arrows"><button type="button" class="button-outline" data-set-progress="${p-1}" ${p===1?'disabled':''}>← Earlier section</button><button type="button" class="button-primary" data-set-progress="${p+1}" ${p===length?'disabled':''}>Unlock next section →</button></div></div>
+      <div class="import-reader-progress"><span>YOUR SPOILER BOUNDARY</span><strong>Through PDF page ${unlocked} of ${s.pages.length}</strong><div class="import-progress-track"><span style="width:${Math.round(unlocked/s.pages.length*100)}%"></span></div></div>
+      <form id="page-jump-form" class="page-jump-form"><label for="page-jump-input">Go to a source PDF page</label><input id="page-jump-input" type="number" min="1" max="${unlocked}" step="1" value="${pageNumber}" required><button type="submit" class="button-outline">Go to page →</button><small>Only pages 1–${unlocked} are unlocked</small></form>
+      <article class="source-reading-page" tabindex="-1"><div class="source-reading-header"><div><p class="tiny-label">ORIGINAL PDF PAGE ${pageNumber} / ${s.pages.length}</p><h3>Page ${pageNumber}</h3></div><span>${text?'SOURCE TEXT':'IMAGE OR EMPTY PAGE'}</span></div><div class="source-reading-text">${text?esc(text):'<p>No selectable text was found on this page. The browser preview does not include OCR for scanned pages.</p>'}</div><p class="source-reading-caption">Extracted text may lose complex layouts. Page citations refer to the uploaded file, not an AI-generated summary.</p></article>
+      <div class="reader-next-actions"><button type="button" class="button-outline" data-go-page="${pageNumber-1}" ${pageNumber===1?'disabled':''}>← Previous page</button><button type="button" class="button-outline" data-view-inline="evidence">Search source ↗</button><button type="button" class="button-primary" data-go-page="${pageNumber+1}" ${pageNumber===unlocked?'disabled':''}>Next page →</button></div>
     </section>`;
   }
   function renderImportedPeople(s,p) {
@@ -141,7 +148,7 @@
   }
   function renderImportedEvidence(s,p) {
     const previous=state.answer;
-    const output=previous?.localResults?.length?`<div class="answer-content"><span class="answer-status">LITERAL SOURCE MATCHES · NOT AI ANSWERS</span><h3>Matching source passages</h3><p>These excerpts contain search terms. They do not by themselves establish the answer to your question.</p>${previous.localResults.map(e=>`<article class="source-card"><div class="source-card-top"><span class="tiny-label">PDF PAGE ${e.page}</span><span class="status-chip">SOURCE TEXT</span></div><blockquote>${esc(e.quote)}</blockquote><button type="button" class="button-outline source-jump" data-source-chapter="${e.chapter}">Open section ${e.chapter} →</button></article>`).join('')}</div>`:previous?`<div class="answer-idle"><h3>No matching text in your unlocked pages.</h3><p>Try a distinctive name or phrase, or advance your reading point. This is literal search, not semantic AI inference.</p></div>`:`<div class="answer-idle"><span class="answer-glyph">⌕</span><h3>Search the pages you have read.</h3><p>Search names, objects or events. Results cite the exact PDF page they came from.</p></div>`;
+    const output=previous?.localResults?.length?`<div class="answer-content"><span class="answer-status">LITERAL SOURCE MATCHES · NOT AI ANSWERS</span><h3>Matching source passages</h3><p>These excerpts contain search terms. They do not by themselves establish the answer to your question.</p>${previous.localResults.map(e=>`<article class="source-card"><div class="source-card-top"><span class="tiny-label">PDF PAGE ${e.page}</span><span class="status-chip">SOURCE TEXT</span></div><blockquote>${esc(e.quote)}</blockquote><button type="button" class="button-outline source-jump" data-source-page="${e.page}">Open PDF page ${e.page} →</button></article>`).join('')}</div>`:previous?`<div class="answer-idle"><h3>No matching text in your unlocked pages.</h3><p>Try a distinctive name or phrase, or advance your reading point. This is literal search, not semantic AI inference.</p></div>`:`<div class="answer-idle"><span class="answer-glyph">⌕</span><h3>Search the pages you have read.</h3><p>Search names, objects or events. Results cite the exact PDF page they came from.</p></div>`;
     return `<section class="imported-analysis"><div class="workspace-header"><div><p class="tiny-label">EXACT SOURCE / PRIVATE BROWSER SEARCH</p><h2>Ask the source.</h2><p>Search through PDF page ${s.chapters[p-1].toPage} of ${s.pages.length}. No questions or documents go to any server.</p></div>${storyPicker()}</div><div class="ask-layout"><div class="ask-card"><form id="ask-form"><label for="question-input">What would you like to find?</label><textarea id="question-input" maxlength="350" rows="3" placeholder="Example: Haymitch and Sid" required>${esc(state.query)}</textarea><button class="button-primary" type="submit">Search my PDF ↗</button></form><div class="bottom-note">Search results are not AI answers. The full app's Ollama analysis is intentionally unavailable on this public site.</div></div><div class="answer-pane" aria-live="polite">${output}</div></div></section>`;
   }
   function answerImportedQuestion(s,p,query) {
@@ -149,36 +156,63 @@
     state.answer={localResults:matches};state.query=query;render();
   }
   async function importDocument(file) {
-    if(!file)return;
-    if(file.size>40*1024*1024){state.importMessage='File is over the 40 MB browser limit. Please choose a smaller PDF.';render();return;}
-    if(!/\.(pdf|txt)$/i.test(file.name)){state.importMessage='Only PDF and plain text files are supported.';render();return;}
+    if(!file || state.importing)return;
+    if(file.size===0){state.importMessage='The selected file is empty. Choose a PDF or text file containing readable text.';render();return;}
+    if(file.size>40*1024*1024){state.importMessage='This file exceeds the 40 MB browser limit. Choose a smaller PDF or TXT file.';render();return;}
+    if(!/\.(pdf|txt)$/i.test(file.name)){state.importMessage='This preview supports only PDFs with selectable text or plain .txt files.';render();return;}
+    const currentToken=++importToken;
+    const checkCancelled=()=>{if(currentToken!==importToken)throw Error('Import cancelled.');};
     state.importing=true;state.importMessage='Reading document locally…';render();
+    let doc=null;
     try {
       let pages=[];
       if(/\.pdf$/i.test(file.name)) {
         const pdfjs=await import('./vendor/pdf.min.mjs');
+        checkCancelled();
         pdfjs.GlobalWorkerOptions.workerSrc=new URL('./vendor/pdf.worker.min.mjs',location.href).href;
         const bytes=new Uint8Array(await file.arrayBuffer());
+        checkCancelled();
         const task=pdfjs.getDocument({data:bytes,isEvalSupported:false});
-        const doc=await task.promise;
-        if(doc.numPages>800){await doc.destroy();throw Error('PDF exceeds the 800-page browser limit.');}
+        doc=await task.promise;
+        checkCancelled();
+        if(doc.numPages>800)throw Error('PDF exceeds the 800-page browser limit.');
+        let extracted=0;
         for(let i=1;i<=doc.numPages;i++) {
+          checkCancelled();
           const page=await doc.getPage(i);
-          const content=await page.getTextContent();
-          pages.push(content.items.map(item=>(item.str||'')+(item.hasEOL?'\n':' ')).join(''));
+          try {
+            const content=await page.getTextContent();
+            checkCancelled();
+            const text=content.items.map(item=>(item.str||'')+(item.hasEOL?'\n':' ')).join('');
+            extracted+=text.length;
+            if(extracted>MAX_EXTRACTED_CHARACTERS)throw Error('Extracted text exceeds the 8 MB browser memory limit. Try a smaller document.');
+            pages.push(text);
+          } finally {page.cleanup();}
           if(i===1||i%20===0||i===doc.numPages){state.importMessage=`Processing PDF page ${i} of ${doc.numPages} locally…`;const status=qs('#import-status');if(status)status.textContent=state.importMessage;await new Promise(resolve=>setTimeout(resolve,0));}
-          page.cleanup();
         }
-        await doc.destroy();
       } else {
-        const text=await file.text();
+        const text=await file.text();checkCancelled();
+        if(text.length>MAX_EXTRACTED_CHARACTERS)throw Error('Text exceeds the 8 MB browser limit. Choose a smaller file.');
         const chunk=6500;for(let i=0;i<text.length;i+=chunk)pages.push(text.slice(i,i+chunk));
       }
+      checkCancelled();
       const title=file.name.replace(/\.(pdf|txt)$/i,'').replace(/[_-]+/g,' ').trim();
       const book=window.BTL_LOCAL_ENGINE.build(title,pages);
-      stories.unshift(book);state.progress[book.id]=1;state.importMessage='Document ready · no upload performed.';
-      state.importing=false;openStory(book.id);toast('Private PDF imported into this tab');
-    }catch(err){state.importing=false;state.importMessage=`Import unsuccessful: ${String(err?.message||err)}. Your file was not uploaded.`;render();}
+      checkCancelled();
+      stories.unshift(book);state.progress[book.id]=1;state.activePage=1;
+      state.importMessage='Document ready · processed only in this browser tab.';
+      state.importing=false;openStory(book.id);toast('Private document imported into this tab');
+    }catch(err){
+      if(currentToken===importToken){
+        state.importing=false;
+        const name=String(err?.name||'');
+        const message=String(err?.message||err);
+        state.importMessage=name==='PasswordException'||/password/i.test(message)?'This PDF is password-protected or encrypted. Unlock it locally before importing.':
+          name==='InvalidPDFException'||/invalid pdf|missing pdf/i.test(message)?'This PDF appears damaged or invalid. Try opening and resaving it locally, then import again.':
+          `Import unsuccessful: ${message}. Your document was not uploaded.`;
+        render();
+      }
+    }finally{if(doc)try{await doc.destroy();}catch{}}
   }
   function answerQuestion(query){state.query=query;const s=story(),p=progress();if(s.local)return answerImportedQuestion(s,p,query);const normal=query.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();if(!normal){state.answer=null;render();return;}
     let match=s.qa.find(q=>q.prompt.toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()===normal);
@@ -201,19 +235,24 @@
     qsa('[data-top-view]').forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.topView,true)));
   qs('#workspace-tabs').addEventListener('click',e=>{const b=e.target.closest('[data-guide-view]');if(b)navigate(b.dataset.guideView,true);});
   qs('#sidebar-book-panel').addEventListener('change',e=>{if(e.target.id==='sidebar-story')openStory(e.target.value);if(e.target.id==='sidebar-position')changeProgress(Number(e.target.value));});
-  qs('#sidebar-book-panel').addEventListener('click',e=>{if(e.target.closest('[data-sidebar-read]'))navigate('story',true);if(e.target.closest('[data-sidebar-import]')){navigate('library');qs('#book-upload')?.click();}});
+  qs('#sidebar-book-panel').addEventListener('click',e=>{if(e.target.closest('[data-sidebar-read]'))navigate('story',true);if(e.target.closest('[data-sidebar-import]')){navigate('library');qs('#book-upload')?.click();}const remove=e.target.closest('[data-remove-story]');if(remove)removeImported(remove.dataset.removeStory);});
   qsa('[data-text-adjust]').forEach(btn=>btn.addEventListener('click',()=>{readerSize=btn.dataset.textAdjust==='0'?100:Math.min(145,Math.max(85,readerSize+Number(btn.dataset.textAdjust)*10));document.documentElement.style.setProperty('--reading-scale',readerSize+'%');}));
   qsa('.nav-item').forEach(btn=>btn.addEventListener('click',()=>navigate(btn.dataset.view,true)));
   qs('#theme-select').addEventListener('change',e=>{setTheme(e.target.value);toast('Room appearance updated');});
   qs('#reset-demo').addEventListener('click',()=>{
-    if(!window.confirm('Reset the sample stories to chapter 1 and restore the default appearance?'))return;
-    for(const s of stories)state.progress[s.id]=1;state.storyId=stories.find(s=>!s.local)?.id||stories[0].id;state.person=null;state.answer=null;state.query='';setTheme('amethyst');persist();navigate('library',true);toast('Demo reading progress reset');
+    if(!window.confirm('Reset the demo and remove every imported document from this tab?'))return;
+    importToken++;state.importing=false;for(let i=stories.length-1;i>=0;i--)if(stories[i].local){delete state.progress[stories[i].id];stories.splice(i,1);}
+    for(const s of stories)state.progress[s.id]=1;state.storyId=stories[0].id;state.activePage=1;state.person=null;state.answer=null;state.query='';state.importMessage='All imports cleared from this tab.';setTheme('amethyst');persist();navigate('library',true);toast('Demo reset and imported documents cleared');
   });
   qs('#view-content').addEventListener('change',ev=>{if(ev.target.id==='story-pick')openStory(ev.target.value);if(ev.target.id==='local-section')changeProgress(Number(ev.target.value));if(ev.target.id==='book-upload')importDocument(ev.target.files?.[0]);});
-  qs('#view-content').addEventListener('submit',ev=>{if(ev.target.id!=='ask-form')return;ev.preventDefault();const input=qs('#question-input');if(input)answerQuestion(input.value.trim());});
+  qs('#view-content').addEventListener('submit',ev=>{if(ev.target.id==='page-jump-form'){ev.preventDefault();const n=Number(qs('#page-jump-input')?.value);if(Number.isInteger(n))goToPage(n);return;}if(ev.target.id!=='ask-form')return;ev.preventDefault();const input=qs('#question-input');if(input)answerQuestion(input.value.trim());});
   qs('#view-content').addEventListener('click',ev=>{
     const btn=ev.target.closest('button');if(!btn)return;
     if(btn.hasAttribute?.('data-import-trigger')){qs('#book-upload')?.click();return;}
+    if(btn.hasAttribute?.('data-cancel-import')){importToken++;state.importing=false;state.importMessage='Import cancelled. No document was saved.';render();return;}
+    if(btn.dataset.removeStory){removeImported(btn.dataset.removeStory);return;}
+    if(btn.dataset.goPage){goToPage(Number(btn.dataset.goPage));return;}
+    if(btn.dataset.sourcePage){goToPage(Number(btn.dataset.sourcePage));return;}
     if(btn.hasAttribute?.('data-expand-import')){state.localExpanded=true;render();return;}
     if(btn.dataset.openStory){openStory(btn.dataset.openStory);return;}
     if(btn.dataset.viewInline){navigate(btn.dataset.viewInline,true);return;}

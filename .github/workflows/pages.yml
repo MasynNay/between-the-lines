@@ -48,6 +48,7 @@ jobs:
           node --check demo/demo.js
           node --check demo/import-engine.js
           node tests/local-import.test.cjs
+          node tests/privacy-workflow.test.cjs
           node tests/demo.test.cjs
           python3 tests/verify_site.py
       - name: Configure Pages

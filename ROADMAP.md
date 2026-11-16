@@ -1,6 +1,6 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 11, 2026  
+**Last reviewed:** November 16, 2026  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
 **Private app checkpoint:** C111 complete local source, kept separately from this public website.
@@ -15,8 +15,8 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 
 - [ ] Independently review the new dark-first homepage and demo on desktop, phone, keyboard, and screen reader.
 - [ ] Confirm Pages custom domain and **Enforce HTTPS**; verify `/` and `/demo/` after cache refresh.
-- [ ] Verify a visitor can import a selectable-text PDF entirely on-device, navigate its pages, change reading position, and clear the import without external traffic.
-- [ ] Test large uploads and corrupted/encrypted/scanned documents. Give clear, helpful limitations instead of silent failures.
+- [ ] Verify a visitor can import a selectable-text PDF entirely on-device, navigate its pages, change reading position, and clear the import without external traffic. **C116 progress:** isolated desktop/mobile browser-TXT checks and exact-page navigation pass; production PDF.js worker still needs independent verification.
+- [ ] Test large uploads and corrupted/encrypted/scanned documents. Give clear, helpful limitations instead of silent failures. **C116 progress:** file-size and extracted-text guards, cancellation, and error messages implemented; actual malformed/encrypted PDF parsing still needs an end-to-end browser run.
 - [ ] Capture current real local-app screenshots for the portfolio; label historical ones until replaced.
 
 **Done when:** the demo passes end-to-end browser checks and its claims match the visitor's actual experience.
@@ -69,9 +69,19 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 4. Before calling any upgrade completed, test the exact archive or commit being delivered. Separate unit/integration checks from independent real-model evaluations.
 5. Work one priority at a time. Keep this roadmap and the public README accurate as code evolves.
 
+## C116 progress (November 16, 2026)
+
+- [x] Source and test review of the C115 public repository, confirming the homepage, demo, and two-edition boundaries.
+- [x] Implement an explicit **Remove book** control and a Reset action that clears imported files from active in-memory state; never persist imported prose.
+- [x] Implement **exact PDF page** view and go-to-page controls: source results can now open page N, within the stopping-point boundary, without rendering whole multi-page sections at once.
+- [x] Add a cancellable import flow and guard against excessive extracted text, empty files, oversized files, and incorrect formats. Provide actionable error messages for damaged or encrypted files.
+- [x] Exercise TXT import, page citations, spoiler gates, removal, themes, and responsive layouts with isolated desktop/mobile Chromium DOM tests (no server navigation).
+- [ ] Perform a full hosted-site audit with an actual selectable-text PDF and the production-bundled PDF.js worker, including HTTP traffic inspection. Chromium navigation and local npm package download are blocked in the development environment; do not mark this verified.
+- [ ] Verify custom-domain HTTPS enforcement and collect new real private-app screenshots.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
 - The homepage has a **dark-first theme** and a story-evidence illustration in its opening, instead of a large rectangular product screenshot; genuine private-app screenshots remain in the feature tour.
 - The local application is **not publicly deployed or connected** to this website. Deep Ollama accuracy is still unverified independently.
-- Suggested next task: **P0 — independent end-to-end website and browser PDF import audit**, followed by the P1 factual-accuracy benchmark.
+- Suggested next task: **P0 — verify an actual PDF upload against the published PDF.js worker and custom-domain HTTPS**, then start **P1 — the human-reviewed private Ollama comprehension benchmark**. Do not call the browser demo a complete local application.
