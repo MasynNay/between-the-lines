@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C131 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C132 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C131 private complete-source checkpoint with a unit-tested, disposable Docker recovery rehearsal. No public installer, actual Docker rehearsal or certified live upgrade.
+**Private app checkpoint:** C132 private complete-source checkpoint with a two-original-work, 32-question local model evaluation kit. No public installer, certified model accuracy, or live-host upgrade.
 
 ## The two editions
 
@@ -240,6 +240,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Run 32+ real local Ollama source-grounded questions across two independently reviewed works, then test a genuine version-to-version Docker upgrade, data-preserving cutover and rollback on an authorized disposable host.
 
 **Privacy boundary:** Only these public-safe milestone notes appear in this public repository. The private C131 source, ZIP, books, accounts, credentials, Docker state, and model output remain separate. No home server or live library was accessed.
+
+## C132 private two-work comprehension evaluation kit (November 17, 2026)
+
+- [x] Add two **original short synthetic works** with four source sections each and **32 distinct stopping-point-scoped questions** (18 assistant-labeled supported, 14 assistant-labeled unknown). They exercise actors, objects, chronology, uncertainty, narrator identity, negation, rumors, dreams and information withheld until later chapters.
+- [x] Add a dependency-free inspection command and four opt-in, bounded local Ollama batch instructions, using the existing loopback-only runner. No source book files, user data, or model answers are uploaded to the public demo.
+- [x] Add a private, offline two-work report combiner rejecting swapped fixture hashes, duplicate or out-of-scope IDs, missing responses, report errors, and mixed model names. Owner-only, non-overwritable summaries exclude raw model answers and always mark human review and release approval **false**.
+- [x] Verify a fresh-extracted C132 private ZIP: **956 source file hashes**, **474 protected Docker-target files**, **318 relative imports**, and **1,108/1,108 offline fixture tests across 12/12 batches**, plus **15 focused tests**, with zero failures.
+- [ ] **This is not genuine AI-accuracy evidence.** No Ollama inference was performed, no independent human verified the gold labels or graded model answers, and short synthetic stories are not full-length works. Run the tests on an authorized local model, independently review every answer, then extend the benchmark to longer legally usable texts.
+- [ ] The **20 genuine `parse5@7.3.0` HTML/Wikipedia integration tests remain unverified** (npm registry unavailable here), as does real Docker volume recovery and an actual version-to-version data-preserving upgrade.
+
+**Privacy boundary:** This public repository records only milestone notes. The C132 private source ZIP, original benchmark source passages, model reports, account information, user books, credentials and Docker state remain outside GitHub Pages. No home server was accessed.
 
 ## Current stopping point
 
