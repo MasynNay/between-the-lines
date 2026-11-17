@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C132:** Prepared a **32-question, two-original-short-story benchmark** with chapter-aware citations and an offline, fail-closed multi-work batch combiner. A fresh private ZIP passed **1,108 offline fixture tests** and **15 focused tests**. This does **not** establish genuine Ollama answers, independently reviewed gold labels, or full-book comprehension. The 20 real `parse5` cases and actual Docker host recovery are also unverified. No private source, installer, story passages, answers or model credentials are included here.
+
+
 - **Private application C131:** Adds a synthetic-only, opt-in Docker-volume recovery rehearsal with protected snapshot/restore checks. The *offline unit and fixture tests* passed **1,100/1,100** from a fresh source ZIP, with **24 focused tests** passing. **Actual Docker execution did not occur**; real `parse5` integration, independent Ollama accuracy and a live version-to-version rollback are also unverified. This public repository contains no C131 private app source or installer.
 
 
