@@ -11,3 +11,7 @@ The public website does not host accounts, private imports, Ollama, the full Bet
 The theme and progress of the authored sample stories are remembered in browser localStorage; document text and PDF bytes are not persisted. A document may remain in tab memory until removed, reset, or reloaded; closing the tab is not a substitute for using a trusted device. The server hosting the static website may still log ordinary site requests, as with other web hosting. For privacy-sensitive PDFs, visitors should only use devices they trust.
 
 This is a browser-only functional version of selected user interactions, **not the same full backend or an AI-quality benchmark**. Full public AI analysis would require an isolated cloud backend with authentication, strict resource budgets, content controls, and security review. Do not open the home Docker server to public traffic.
+
+## C117 real-browser verification
+
+The deployment workflow now tests the bundled PDF.js parser and web worker in Chromium with a synthetic, two-page PDF generated in memory. It checks spoiler-aware source navigation, removing imports, rejecting empty-scanned PDFs, and the absence of off-origin network requests or stored prose. This covers the locally hosted production assets in CI, **not** independent public-domain HTTPS verification or a human audit of the private Ollama research engine.

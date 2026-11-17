@@ -47,7 +47,7 @@ If the repo is created first and GitHub is connected to ChatGPT, the assistant c
 
 Open `index.html` or serve this folder with `python3 -m http.server 8765` and navigate to `http://localhost:8765`. The demo runs at `/demo/`.
 
-`node tests/demo.test.cjs`, `node tests/local-import.test.cjs`, and `node tests/privacy-workflow.test.cjs` run the source-linked chapter-gating, exact-page navigation, removal, cancellation, and local import checks without needing a browser. `python3 tests/browser_smoke.py` optionally checks the actual DOM in isolated Chromium at desktop and mobile sizes if Playwright and Chromium are installed; it does not run a production PDF.js worker or verify the hosted domain. PDF.js is installed by the deployment workflow, not this checkout.
+`node tests/demo.test.cjs`, `node tests/local-import.test.cjs`, and `node tests/privacy-workflow.test.cjs` check source grounding, spoiler boundaries, document removal, cancellation, and import limits. `python3 tests/browser_smoke.py` checks the DOM in isolated Chromium if Playwright is installed. **C117 adds a real PDF.js browser gate**: the GitHub Pages build bundles pinned PDF.js, then runs `node tests/pdf-browser-smoke.cjs` in Chromium at desktop and mobile widths. It imports a generated two-page PDF, validates exact citations and locked pages, tests an image-only PDF, and verifies no unexpected network requests or stored prose. PDF.js and Playwright Core are installed by the CI workflow, not committed into this source tree. An optional diagnostic checks production HTTPS routes after deployment.
 
 ## Source confidentiality
 

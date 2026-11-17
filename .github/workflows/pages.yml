@@ -70,3 +70,12 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Probe published HTTPS pages (diagnostic only)
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in / /demo/ /demo/vendor/pdf.min.mjs /demo/vendor/pdf.worker.min.mjs; do
+            curl --fail --silent --show-error --location --retry 3 --retry-delay 4 --max-time 30               "https://btl.masynnay.com${path}" -o /dev/null
+            echo "PASS HTTPS https://btl.masynnay.com${path}"
+          done

@@ -1,6 +1,6 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026  
+**Last reviewed:** November 16, 2026 (C117)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
 **Private app checkpoint:** C111 complete local source, kept separately from this public website.
@@ -79,9 +79,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Perform a full hosted-site audit with an actual selectable-text PDF and the production-bundled PDF.js worker, including HTTP traffic inspection. Chromium navigation and local npm package download are blocked in the development environment; do not mark this verified.
 - [ ] Verify custom-domain HTTPS enforcement and collect new real private-app screenshots.
 
+## C117 progress (November 16, 2026)
+
+- [x] Use a **real Chromium PDF.js integration test** during each Pages build, with the same pinned parser and web worker shipped to visitors.
+- [x] Exercise generated, original two-page PDF input at desktop and mobile widths: verify text extraction, chapter gating, exact-page search citations, removal, image-only PDF rejection, and no outbound/upload requests or persisted book prose.
+- [x] GitHub Actions **build and deploy passed** for commit `5ea8008` (C117 initial test gate). The synthetic fixture is generated in memory and is never checked into the public site as a PDF.
+- [ ] Confirm hosted HTTPS responses and worker assets from an external runner (diagnostic probe added); verify public custom-domain behavior independently after any DNS change.
+- [ ] Run independent assistive-technology checks on actual devices, then progress to the P1 private Ollama factual-accuracy benchmark.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
 - The homepage has a **dark-first theme** and a story-evidence illustration in its opening, instead of a large rectangular product screenshot; genuine private-app screenshots remain in the feature tour.
 - The local application is **not publicly deployed or connected** to this website. Deep Ollama accuracy is still unverified independently.
-- Suggested next task: **P0 — verify an actual PDF upload against the published PDF.js worker and custom-domain HTTPS**, then start **P1 — the human-reviewed private Ollama comprehension benchmark**. Do not call the browser demo a complete local application.
+- Suggested next task: **P0 — finish hosted HTTPS/device/accessibility checks**, then start **P1 — the human-reviewed private Ollama comprehension benchmark**. The public demo remains a browser-based preview, not the complete local application.
