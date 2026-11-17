@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C125 private / C122 public)  
+**Last reviewed:** November 16, 2026 (C126 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C125 private complete-source checkpoint with independently verified staging copies. No publicly distributed installer or certified host upgrade.
+**Private app checkpoint:** C126 private complete-source checkpoint with bounded offline regression and staging verification. No public installer or certified live-host upgrade.
 
 ## The two editions
 
@@ -175,6 +175,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Real Ollama answers with 32+ independently human-reviewed questions, actual Docker installation, real-host upgrade, and rollback after new-version writes remain unverified.
 
 **Boundary:** This public repository contains only milestone notes. Neither private C125 source nor any books, accounts, credentials, Docker state or model output have been published. No home server was accessed.
+
+## C126 private offline verification checkpoint (November 16, 2026)
+
+- [x] Replace inconclusive monolithic offline regression reporting with 12 independently timed batches. All **1,077/1,077 executed offline tests passed**, with 0 failures, including a second run from the freshly extracted private C126 archive.
+- [x] Reject unsafe staging attestations (malformed JSON, overbroad permissions, oversized payloads), and re-inventory the original private data at the end of read-only staged verification.
+- [x] Verify the fresh C126 package: **899 protected source files**, **444 protected Docker-target files**, **8/8 staged-copy tests**, and **10/10 selected source/portfolio/runner tests** passed.
+- [ ] The **20 real `parse5@7.3.0` HTML/Wikipedia integration cases remain unverified**: npm access failed in the isolated environment, and the offline fixture is deliberately not treated as a real parser. The full unfiltered suite has **not** passed.
+- [ ] Complete independent human review of real local Ollama inference on 32+ questions from two works. Synthetic exercises are **not** accuracy evidence.
+- [ ] Verify an actual Docker-host installation, safe migration/rollback after writes, and accessible mobile use before calling any private release production-ready.
+
+**Boundary:** Public GitHub contains only this milestone documentation and the static, client-only browser demo. C126 private source, installation archive, credentials, personal books, and model outputs remain unpublished. No home server was accessed.
 
 ## Current stopping point
 
