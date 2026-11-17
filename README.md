@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C126:** A newly verified private checkpoint adds bounded offline regression batches and stricter non-destructive upgrade-stage audits. **1,077 offline tests passed across 12 batches**, including a fresh-extraction run. The **20 real `parse5` integration tests remain unverified**, and there are no real human-reviewed Ollama scores, validated Docker cutover, or post-write rollback. Nothing from the private C126 package is included here.
+
+
 - **Private application C125:** independent read-only verification of a separate, stopped-app staging copy; exact source file hashes, private permissions, preserved empty directories, and atomic Linux no-overwrite publication. A clean-source ZIP passed **58 focused tests**. The full offline regression and the 20 real `parse5` integration checks are **not certified**. This is not a public installer or safe live upgrade, and no model-quality claims are made.
 
 - **Private application C124:** a non-destructive upgrade *preparation* workflow can inspect existing data and create a new, separately verified staged copy while preserving the original. **This is not a live Docker upgrade, release-quality migration, or published installer.** Focused synthetic checks passed; broad regression, genuine HTML parser integration, actual model accuracy, and a tested host upgrade remain outstanding.
