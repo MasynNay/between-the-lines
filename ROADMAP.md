@@ -120,6 +120,19 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 
 **Publication boundary:** The C120 application ZIP remains private. This public repository only records the milestone and continues to serve the static GitHub Pages demo without contacting Aang or Korra.
 
+## C121 private model-output safety checkpoint (November 16, 2026)
+
+- [x] Fix a genuine bug in the private Ollama evaluation runner: nonboolean or missing `supported` fields must **never** be coerced to `false` and credited as correct abstentions.
+- [x] Add strict candidate-response validation for exactly typed JSON fields, empty abstentions, bounded answers, source quotes, chapter integers, and oversized outputs; record malformed responses as **invalid**, not unknown.
+- [x] Guard the evaluation against silently oversized prompts. Keep failed transport/context requests unscored; allow a bounded evaluation to continue after an invalid model response.
+- [x] Strengthen C120 human-review scoring: a missing or malformed response, a citation beyond the reader's stopping point, or a quote absent from the cited source cannot be marked `correct` merely by editing a worksheet.
+- [x] Add a mock-only Ollama CLI integration test in a disposable private report folder; no network requests, account data, home servers, or public backend are involved.
+- [x] Verify one complete C121 clean-install ZIP from fresh extraction: **861 protected source files, 427 Docker-target files, 38 focused tests passing**.
+- [ ] The broader offline regression result is **1,058 passing checks across 229 test files, with 20 HTML/Wikipedia parsing cases blocked** because `npm ci` could not download real `parse5` (`EAI_AGAIN`). The full suite is **not** certified green.
+- [ ] Run genuine local Ollama inference on two independently reviewed works, score 32+ source-grounded questions by human reviewers, and validate privacy/security and installation on an actual supported host.
+
+**Publication boundary:** This public repository continues to contain only GitHub Pages site materials and milestone documentation. No private C121 source, private book PDF, model output, credentials or Docker containers have been published.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
