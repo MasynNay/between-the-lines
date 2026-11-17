@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C123 private / C122 public)  
+**Last reviewed:** November 16, 2026 (C124 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C123 private complete-source checkpoint, kept separate from this public website. Not a publicly distributed installer.
+**Private app checkpoint:** C124 private complete-source checkpoint with staging-only upgrade preparation. No publicly distributed installer or certified host upgrade.
 
 ## The two editions
 
@@ -152,6 +152,18 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Confirm a safe data-preserving upgrade, live Docker installation, real-browser accessibility, and security testing on an authorized host. Never run a fresh reset against an existing private library.
 
 **Privacy boundary:** Only this high-level milestone report is public. The private C123 archive, source, model responses, book content, credentials, and local Docker services are not connected to or published through GitHub Pages.
+
+## C124 private data-preserving upgrade preparation (November 16, 2026)
+
+- [x] Provide a separate, **inspection-first** staging tool that copies existing `app/data` and optional `.env` into a **new** complete private-source installation, without changing the existing application or contacting Docker.
+- [x] Check staged file bytes, secret permissions and protected source manifest. Reject symlinks, hard-linked data, mounted data, nested destination trees and overwrites; a failed stage is discarded.
+- [x] Verify from a fresh-extracted private archive: **882 protected source files**, **305 Docker source imports**, and **46/46 focused tests passed** on synthetic existing-library data.
+- [ ] Broad C124 offline regression: attempted, but the test process did not produce an authoritative completed summary; **do not call this full-suite green**.
+- [ ] Real `parse5` 7.3.0 is unavailable in this environment. The explicit real-parser preflight reports **unverified**, and the 20 HTML/Wikipedia integration checks remain open.
+- [ ] The staged copy is **not** an activated Docker upgrade. A real backed-up host upgrade and post-write rollback must be tested before installation guidance can be called safe for live libraries.
+- [ ] Complete a separately annotated 32+ question **real** Ollama evaluation across two works, with independent human source review; synthetic model calls do not establish literary accuracy.
+
+**Privacy boundary:** The C124 private package, settings, model output, and user books remain separate from this public GitHub Pages repository. No home servers or containers were touched.
 
 ## Current stopping point
 
