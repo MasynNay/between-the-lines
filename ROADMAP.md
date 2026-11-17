@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C127 private / C122 public)  
+**Last reviewed:** November 16, 2026 (C128 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C127 private complete-source checkpoint with bounded offline regression and disposable restore rehearsal. No public installer or certified live-host upgrade.
+**Private app checkpoint:** C128 private complete-source checkpoint with source-byte drift protection and bounded offline verification. No public installer or certified live-host upgrade.
 
 ## The two editions
 
@@ -196,6 +196,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **Real Ollama comprehension evaluation** on 32+ independently reviewed questions, plus a real Docker-host cutover and post-write rollback, remain unverified. A scratch recovery rehearsal is not proof of a live-volume or database migration.
 
 **Publication boundary:** C127's private source and installation ZIP, personal books, account data, model outputs and credentials remain outside this public GitHub repository. Only these public-safe milestone notes are published, and no home server was touched.
+
+## C128 private source-drift and staging integrity (November 16, 2026)
+
+- [x] Rehash original private data and optional `.env` at the **start and end** of stopped-app staging and read-only validation, preventing identical-size, restored-timestamp writes from passing metadata-only checks.
+- [x] Use no-follow, single-link file checksum reads that check the opened regular-file identity and reject switched inodes or unsafe links.
+- [x] Preserve C127's independently verified staged copy, owner-only disposable recovery rehearsal, and Linux atomic no-overwrite publication.
+- [x] Verify a freshly extracted private C128 complete-source ZIP: **922 protected source files**, **457 Docker-target source files**, **311 resolved relative imports**, and **1,084 offline regression checks passed across 12 bounded batches**.
+- [ ] **20 genuine `parse5@7.3.0` HTML/Wikipedia integrations remain unverified.** Registry DNS failed in the isolated development environment; an inert offline parser fixture cannot certify real parsing.
+- [ ] **Actual local Ollama inference** on 32+ human-reviewed questions across two works, live Docker build/install, and post-write host/volume rollback remain unverified.
+
+**Boundary:** These are public-safe engineering milestone notes only. No C128 private application source, complete installer, user books, account records, settings, model output, or Docker state is published on GitHub Pages. No home host was accessed.
 
 ## Current stopping point
 
