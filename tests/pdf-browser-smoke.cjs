@@ -32,9 +32,15 @@ async function run(){
  await page.locator('.source-reading-page').waitFor({timeout:30000}).catch(async e=>{throw Error('PDF import: '+await page.locator('#import-status').innerText()+' '+e);});
  assert.match(await page.locator('.source-reading-text').innerText(),/copper key/);assert.doesNotMatch(await page.locator('.source-reading-text').innerText(),/lanternword/);
  await page.locator('#local-section').selectOption('2');assert.match(await page.locator('.source-reading-text').innerText(),/lanternword/);
- await page.locator('#workspace-tabs [data-guide-view="evidence"]').click();await page.locator('#question-input').fill('lanternword');await page.locator('#ask-form button').click();
- assert.match(await page.locator('.answer-pane').innerText(),/Open PDF page 2/);await page.locator('.answer-pane [data-source-page="2"]').click();
- assert.match(await page.locator('.source-reading-header').innerText(),/PAGE 2 \/ 2/);await page.locator('[data-view="library"].nav-item').click();
+ await page.locator('#workspace-tabs [data-guide-view="evidence"]').click();
+ await page.locator('#question-input').fill('copper lanternword');await page.locator('#ask-form button').click();
+ assert.match(await page.locator('.answer-pane').innerText(),/PARTIAL MATCH/,'distinct words on different pages must not be presented as a full match');
+ await page.locator('#question-input').fill('lanternword');await page.locator('#ask-form button').click();
+ assert.match(await page.locator('.answer-pane').innerText(),/Open PDF page 2/);
+ assert.equal(await page.evaluate(()=>document.activeElement?.classList.contains('answer-pane')),true,'search results should receive keyboard focus');
+ await page.locator('.answer-pane [data-source-page="2"]').click();
+ assert.match(await page.locator('.source-reading-header').innerText(),/PAGE 2 \/ 2/);
+ assert.equal(await page.evaluate(()=>document.activeElement?.classList.contains('source-reading-page')),true,'page navigation should focus the cited page');await page.locator('[data-view="library"].nav-item').click();
  await page.locator('#view-content [data-remove-story]').first().click();assert.match(await page.locator('#import-status').innerText(),/removed from this tab/);
  await page.locator('#book-upload').setInputFiles({name:'Empty_Scan.pdf',mimeType:'application/pdf',buffer:fixture(true)});
  await page.waitForFunction(()=>document.querySelector('#import-status')?.textContent?.includes('no selectable text'),null,{timeout:30000});
