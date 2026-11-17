@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C129 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C130 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C129 private complete-source checkpoint adding storage-space preflight before staging and disposable restore rehearsals. No public installer or certified live-host upgrade.
+**Private app checkpoint:** C130 private complete-source checkpoint adding an exact 20-case real-parser verification gate. Not a publicly shipped installer or certified live upgrade.
 
 ## The two editions
 
@@ -219,6 +219,16 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Run genuine Ollama literary comprehension with independently reviewed 32+ answers and test live Docker-host cutover/rollback using disposable persistent volumes before a production upgrade.
 
 **Privacy boundary:** Only the public-safe milestone notes are published here. Private C129 source, installer ZIP, user books, accounts, settings, model output and Docker state remain separate. No home host has been touched.
+
+## C130 private real-parser integration gate (November 17, 2026)
+
+- [x] Add a **fail-closed, private-source integration runner** that selects all **20 known HTML/Wikipedia `parse5` cases** from six test files. It validates the pinned `parse5@7.3.0` lock, refuses injected test-only fixture loaders and version mismatches, sanity-checks DOM parsing, then requires 20 genuine selected tests to pass before reporting success.
+- [x] Provide a read-only `--plan` mode for inspecting exact case names and their owning files without installing dependencies, using Docker, or reading an existing personal library.
+- [x] Verify the fresh-extracted private C130 archive: **940 protected source files**, **466 Docker-target source files**, **315 resolved imports**, **11 focused tests passing**, and **1,092 offline fixture tests passing across 12 bounded batches**.
+- [ ] **The 20 real `parse5` tests have NOT passed or even run with the genuine package.** Locked dependency installation remains blocked by unavailable npm registry access here. The gate correctly returns a nonzero `REAL_PARSE5_NOT_VERIFIED` result. Offline fixtures do not establish genuine parsing correctness.
+- [ ] Run 32+ actual local Ollama comprehension answers across two independently annotated works with blind human grading; verify real Docker image build, secure host installation, persistent-volume upgrades and recovery on an authorized disposable host.
+
+**Privacy boundary:** The public repository receives only these notes. C130 private app code, installation ZIP, imported books, accounts, credentials, model outputs and home-host data are not published or accessed.
 
 ## Current stopping point
 

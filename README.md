@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C130:** Introduces an exact **20-case real `parse5` test gate** with a dependency-free plan and fail-closed execution that rejects the offline fixture. A fresh private ZIP passed **1,092 offline fixture tests** and **11 focused tests**. **The 20 genuine parser tests remain unverified** because the real dependency could not be fetched here. Real Ollama comprehension, Docker build and live data-preserving upgrades are also unverified. The private installer/source is **not** in this repository.
+
+
 - **Private application C129:** Before an inspect-first staged copy or disposable recovery rehearsal, the private tool now estimates free space and refuses insufficient-space operations, retaining a minimum **64 MiB or 10% headroom**. The earlier offline suite passed **1,088 fixture-based tests in 12 batches**; **20 genuine `parse5` cases**, real Ollama accuracy, and live Docker activation/rollback remain unverified. The private application, ZIP and user data are not included here.
 
 
