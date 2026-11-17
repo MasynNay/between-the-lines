@@ -7,6 +7,7 @@
 - [x] Separate build and deploy jobs publish the browser preview and self-hosted PDF.js parser.
 - [x] Automated text-import, spoiler-boundary, theme, privacy and source-integrity checks pass.
 - [x] C117 checks real PDF upload through the production PDF.js parser and worker in Chromium at desktop/mobile sizes.
+- [x] GitHub Actions successfully probes the public HTTPS homepage, `/demo/`, and both bundled PDF.js assets.
 
 ## Still requires independent verification
 

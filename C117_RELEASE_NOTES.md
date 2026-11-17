@@ -17,9 +17,10 @@
 - Synthetic fixture independently parses as two PDF pages with text extraction using PyMuPDF.
 - Existing C116 JavaScript and static-site verification suites pass locally.
 - **C117 GitHub Actions real browser test passed at both 1440 px and 390 px**, then Pages successfully deployed commit `5ea80080737becda490303b4b295145266bc27d4`.
+- GitHub Pages deployed documentation checkpoint `48b5d719f970dbd69b58a9296ceaa547a8ba31ec` successfully, and the automated HTTPS probe passed for `/`, `/demo/`, `/demo/vendor/pdf.min.mjs`, and `/demo/vendor/pdf.worker.min.mjs`.
 
 ## Not yet verified
 
-- Live custom-domain HTTPS after C117 documentation updates; full-hosted-page audit using a reader-owned real PDF; screen-reader review; actual Ollama model factual accuracy; security of distributing the private app.
+- Cloudflare DNS target and GitHub **Enforce HTTPS** setting from the account UI; full-hosted-page audit using a reader-owned real PDF; screen-reader review; actual Ollama model factual accuracy; security of distributing the private app.
 
 The new tests generate their own PDFs at runtime. **No user's novel, account data, model weights, or private service configuration is included.**

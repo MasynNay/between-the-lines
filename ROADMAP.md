@@ -84,7 +84,7 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [x] Use a **real Chromium PDF.js integration test** during each Pages build, with the same pinned parser and web worker shipped to visitors.
 - [x] Exercise generated, original two-page PDF input at desktop and mobile widths: verify text extraction, chapter gating, exact-page search citations, removal, image-only PDF rejection, and no outbound/upload requests or persisted book prose.
 - [x] GitHub Actions **build and deploy passed** for commit `5ea8008` (C117 initial test gate). The synthetic fixture is generated in memory and is never checked into the public site as a PDF.
-- [ ] Confirm hosted HTTPS responses and worker assets from an external runner (diagnostic probe added); verify public custom-domain behavior independently after any DNS change.
+- [x] Public HTTPS homepage, demo, PDF.js module, and PDF.js worker all returned successful HTTPS responses from the GitHub Actions runner on November 16, 2026. Recheck after DNS changes; physical-device review is still pending.
 - [ ] Run independent assistive-technology checks on actual devices, then progress to the P1 private Ollama factual-accuracy benchmark.
 
 ## Current stopping point
