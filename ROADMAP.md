@@ -97,6 +97,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 
 **Publication boundary:** C118's full private application source and installer remain outside this GitHub Pages repository. The public demo continues to be browser-only and does not use home computing resources.
 
+## C119 private accuracy-safety checkpoint (November 16, 2026)
+
+- [x] Strengthen the private semantic answer pipeline with source-evidence vetoes for **reversed actors**, explicitly negated or imagined actions, unsupported causal links, and reported events with no confirmation. Such claims now return `not-established` rather than proceeding to second-pass model approval.
+- [x] Add a **loopback-only, opt-in Ollama benchmark runner** with offline inspection, bounded local requests, error/timeout handling, source-quote checks, category breakdowns, and separate independent-review eligibility.
+- [x] Provide a nine-question original-fiction benchmark example covering actors, narrator ambiguity, rumors, dreams, negation, chronology, and spoiler cutoffs. **Not an independently reviewed real-book benchmark.**
+- [x] Verify the complete C119 private installation ZIP after fresh extraction, including 847 protected host source files and Docker-target source checks. No Aang containers or public backend were used.
+- [ ] **Full regression pending:** 1,047 of 1,067 offline checks passed; 20 legacy HTML/Wikipedia parsing checks require the real `parse5` dependency, which could not be downloaded in the isolated development environment. These are not marked passed.
+- [ ] Run actual local Ollama inference on independently reviewed book chapters and complete the 32-question, two-work human-evaluated accuracy assessment.
+
+**Boundary:** The public GitHub repository remains static GitHub Pages only. No private source, uploaded novel, credentials, Ollama models, or Docker state are published.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
