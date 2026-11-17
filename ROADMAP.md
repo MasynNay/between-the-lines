@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C117)  
+**Last reviewed:** November 16, 2026 (C123 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C111 complete local source, kept separately from this public website.
+**Private app checkpoint:** C123 private complete-source checkpoint, kept separate from this public website. Not a publicly distributed installer.
 
 ## The two editions
 
@@ -133,9 +133,29 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 
 **Publication boundary:** This public repository continues to contain only GitHub Pages site materials and milestone documentation. No private C121 source, private book PDF, model output, credentials or Docker containers have been published.
 
+## C122 public reading room (November 16, 2026)
+
+- [x] Require full-word literal PDF/TXT search matches, ranked by complete and exact-phrase matches before partial matches.
+- [x] Show matched-term counts and explicitly label partial passage results; matching text is **not** an AI answer.
+- [x] Move keyboard focus to search results and cited PDF pages. The real Chromium + PDF.js desktop/mobile regression and Pages deployment passed.
+- [x] Add PR validation checks before merging public demo changes.
+- [ ] Human accessibility review using actual mobile devices and assistive technology remains pending.
+
+## C123 private evaluation checkpoint (November 16, 2026)
+
+- [x] Enable an **explicit, local-only** Ollama benchmark to run a prepared 32-question suite across several bounded batches. No model inference was invoked in this development environment.
+- [x] Reject overlap, source-hash mismatch, model mismatch, and missing or out-of-batch answers in offline aggregation.
+- [x] Prepare individual gold-blinded reviewer packets limited to source sections available at each question's stopping point. These contain private model outputs/source excerpts and are **never** published here.
+- [x] Verify a fresh-extracted C123 private source archive: 875 protected files; 38 focused checks passing; 1,066 offline non-parser checks passing.
+- [ ] **20 real `parse5` HTML/Wikipedia integration checks still unverified.** The dependency could not be fetched from the isolated environment. Excluded is not equivalent to passing.
+- [ ] Independently annotate two legally accessible works and obtain 32+ genuine local Ollama outputs, then blind-score all answers, citations, and unsupported claims by a real reviewer.
+- [ ] Confirm a safe data-preserving upgrade, live Docker installation, real-browser accessibility, and security testing on an authorized host. Never run a fresh reset against an existing private library.
+
+**Privacy boundary:** Only this high-level milestone report is public. The private C123 archive, source, model responses, book content, credentials, and local Docker services are not connected to or published through GitHub Pages.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
 - The homepage has a **dark-first theme** and a story-evidence illustration in its opening, instead of a large rectangular product screenshot; genuine private-app screenshots remain in the feature tour.
 - The local application is **not publicly deployed or connected** to this website. Deep Ollama accuracy is still unverified independently.
-- Suggested next task: **P0 — finish hosted HTTPS/device/accessibility checks**, then start **P1 — the human-reviewed private Ollama comprehension benchmark**. The public demo remains a browser-based preview, not the complete local application.
+- Suggested next task: **P0 — finish real-device/accessibility checks**, then complete **P1 — a genuine 32+ question human-reviewed local Ollama benchmark** and verify the missing real-parser integration. The public demo remains a browser-based preview, not the complete local application.
