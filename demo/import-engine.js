@@ -47,19 +47,41 @@
     const id='local-'+Date.now().toString(36);
     return {id,title:tidy(title).slice(0,140)||'Untitled document',subtitle:`${entries.length} source pages · imported privately in this browser`,genre:'YOUR PRIVATE DOCUMENT',coverLabel:title,coverClass:'cover-imported',chapters,people,evidence,qa:[],local:true,pages:entries};
   }
+  // Literal source search only: match complete words, rank exact phrases first,
+  // and label partial queries instead of implying a supported answer.
+  function findWholeWord(text, word) {
+    const isWord = c => /[\p{L}\p{M}\p{N}]/u.test(c);
+    let index = text.indexOf(word);
+    while (index !== -1) {
+      if (!isWord(text[index-1] || '') && !isWord(text[index+word.length] || '')) return index;
+      index = text.indexOf(word, index+1);
+    }
+    return -1;
+  }
   function findPassages(book, query, maxSection, limit=6) {
-    const scope=book.chapters[Math.max(0,maxSection-1)]?.toPage||1;
-    const tokens=tidy(query).toLowerCase().match(/[a-z0-9]{3,}/g)?.filter(t=>!prohibited.has(t))||[];
-    if (!tokens.length) return [];
+    if (!Number.isInteger(maxSection) || maxSection<1 || maxSection>book.chapters.length) return [];
+    const scope=book.chapters[maxSection-1].toPage;
+    const phrase=tidy(query).toLowerCase();
+    const tokens=[...new Set((phrase.match(/[\p{L}\p{M}\p{N}]{3,}/gu)||[])
+      .filter(token=>!prohibited.has(token)))].slice(0,12);
+    if(!tokens.length) return [];
     const results=[];
     for(const {page,text} of book.pages) {
       if(page>scope||!text)continue;
       const lower=text.toLowerCase();
-      let best=-1,score=0;
-      for(const token of tokens) {const i=lower.indexOf(token);if(i>=0){score++;if(best<0||i<best)best=i;}}
-      if(score>0) results.push({page,score,quote:excerpt(text,best,280),chapter:Math.ceil(page/Math.max(1,Math.ceil(book.pages.length/MAX_CHUNKS)))});
+      const found=tokens.map(token=>findWholeWord(lower,token));
+      const matched=found.filter(index=>index>=0).length;
+      if(!matched)continue;
+      const phraseAt=tokens.length>1?findWholeWord(lower,phrase):-1;
+      const exactPhrase=phraseAt>=0;
+      const first=exactPhrase?phraseAt:Math.min(...found.filter(index=>index>=0));
+      const allTerms=matched===tokens.length;
+      const score=matched+(allTerms?2:0)+(exactPhrase?4:0);
+      results.push({page,score,matchedTerms:matched,totalTerms:tokens.length,
+        exactPhrase,quote:excerpt(text,first,280),
+        chapter:Math.ceil(page/Math.max(1,Math.ceil(book.pages.length/MAX_CHUNKS)))});
     }
-    return results.sort((a,b)=>b.score-a.score||a.page-b.page).slice(0,limit);
+    return results.sort((a,b)=>b.score-a.score||a.page-b.page).slice(0,Math.max(0,Math.min(limit,20)));
   }
   root.BTL_LOCAL_ENGINE={build,findPassages,likelyName};
 })(typeof window!=='undefined' ? window : globalThis);
