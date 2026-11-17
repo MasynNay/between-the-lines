@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C130 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C131 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C130 private complete-source checkpoint adding an exact 20-case real-parser verification gate. Not a publicly shipped installer or certified live upgrade.
+**Private app checkpoint:** C131 private complete-source checkpoint with a unit-tested, disposable Docker recovery rehearsal. No public installer, actual Docker rehearsal or certified live upgrade.
 
 ## The two editions
 
@@ -229,6 +229,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Run 32+ actual local Ollama comprehension answers across two independently annotated works with blind human grading; verify real Docker image build, secure host installation, persistent-volume upgrades and recovery on an authorized disposable host.
 
 **Privacy boundary:** The public repository receives only these notes. C130 private app code, installation ZIP, imported books, accounts, credentials, model outputs and home-host data are not published or accessed.
+
+## C131 private disposable Docker recovery rehearsal (November 17, 2026)
+
+- [x] Add an **opt-in, isolated Docker-volume rehearsal** for a new app image and newly created synthetic volumes. Its `--plan` mode performs no Docker calls and `--run --confirm-disposable` requires explicit consent and a working local daemon.
+- [x] Include a synthetic-only recovery fixture with byte/permission/ownership inventory, no-follow regular-file checks, 128 MiB limit, tampered-backup refusal, empty-directory preservation and restoration verification. No host bind mounts, published ports, existing containers or existing volume names are used by the intended workflow.
+- [x] Verify a fresh-extracted C131 private source ZIP: **1,100/1,100 offline fixture tests across 12/12 batches**, **24/24 focused tests**, **947 protected host source files**, **469 protected Docker-target files**, **315 resolved relative imports**, and zero missing imports.
+- [ ] **The C131 Docker rehearsal itself is NOT verified.** This development environment lacks Docker. The unit tests only use disposable local directories and mocked daemon failure. A same-image synthetic restore, when eventually run, will not prove old-to-new database migrations or post-write host rollback.
+- [ ] **20 genuine `parse5@7.3.0` HTML/Wikipedia integration tests remain unverified** because the dependency cannot be fetched here. C130's strict real-parser gate remains part of the private application.
+- [ ] Run 32+ real local Ollama source-grounded questions across two independently reviewed works, then test a genuine version-to-version Docker upgrade, data-preserving cutover and rollback on an authorized disposable host.
+
+**Privacy boundary:** Only these public-safe milestone notes appear in this public repository. The private C131 source, ZIP, books, accounts, credentials, Docker state, and model output remain separate. No home server or live library was accessed.
 
 ## Current stopping point
 
