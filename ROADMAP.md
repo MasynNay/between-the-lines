@@ -108,6 +108,18 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 
 **Boundary:** The public GitHub repository remains static GitHub Pages only. No private source, uploaded novel, credentials, Ollama models, or Docker state are published.
 
+## C120 private review-integrity checkpoint (November 16, 2026)
+
+- [x] Reject malformed model abstentions that carry asserted answer text, citations, or a missing/nonboolean support flag. Those must never score as correct unknown answers.
+- [x] Separate automated exact-quote and keyword matching from human factual adjudication. **No automated result can authorize a public accuracy claim**, even with an editable reviewer signature.
+- [x] Add a local-only, **blind review worksheet** bound to exact source and model-response SHA-256 hashes. It hides expected labels and proxy scores, requires explicit verdicts and written reasoning, and invalidates edited source/answer pairs.
+- [x] Add a write-once offline review CLI; no user books, reviewer data, or Ollama requests are shared with the public website.
+- [x] Verify a complete C120 private installation ZIP from a clean extraction: 854 protected source files, 425 installed Docker-context files, 32 focused tests passing.
+- [ ] The offline 228-file regression sweep has **1,052 passing tests and 20 unverified HTML/Wikipedia parsing cases** because the real `parse5` dependency cannot be downloaded here. This is not full-suite certification.
+- [ ] Run a real locally hosted Ollama evaluation against two independently annotated books (32+ reviewed questions), including genuine human review and category-by-category errors. No model accuracy claims are justified yet.
+
+**Publication boundary:** The C120 application ZIP remains private. This public repository only records the milestone and continues to serve the static GitHub Pages demo without contacting Aang or Korra.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
