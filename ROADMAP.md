@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C126 private / C122 public)  
+**Last reviewed:** November 16, 2026 (C127 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C126 private complete-source checkpoint with bounded offline regression and staging verification. No public installer or certified live-host upgrade.
+**Private app checkpoint:** C127 private complete-source checkpoint with bounded offline regression and disposable restore rehearsal. No public installer or certified live-host upgrade.
 
 ## The two editions
 
@@ -186,6 +186,16 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Verify an actual Docker-host installation, safe migration/rollback after writes, and accessible mobile use before calling any private release production-ready.
 
 **Boundary:** Public GitHub contains only this milestone documentation and the static, client-only browser demo. C126 private source, installation archive, credentials, personal books, and model outputs remain unpublished. No home server was accessed.
+
+## C127 private disposable restore rehearsal (November 16, 2026)
+
+- [x] Add an explicit **disposable restore rehearsal** to the existing inspect-first, stopped-app staging workflow. It first validates the already-prepared stage, copies staged `app/data` and optional `.env` into owner-only temporary storage, simulates changes **only inside scratch space**, restores that scratch copy and verifies bytes, directories, and private permissions.
+- [x] Reverify the original and staged installations after the rehearsal, and clean up the disposable backup. Refuse missing stopped-app confirmation, corrupt stages, and datasets above a **128 MiB rehearsal cap**.
+- [x] From a freshly extracted C127 private ZIP, verify **910 protected source files**, **450 protected Docker-target source files**, **309 relative Docker imports with none missing**, **15/15 focused tests** and **1,080/1,080 offline regression tests in 12 batches**.
+- [ ] **20 genuine `parse5` HTML/Wikipedia integration checks remain unverified.** npm registry DNS was unavailable; the offline parser fixture is not a substitute for real dependency integration.
+- [ ] **Real Ollama comprehension evaluation** on 32+ independently reviewed questions, plus a real Docker-host cutover and post-write rollback, remain unverified. A scratch recovery rehearsal is not proof of a live-volume or database migration.
+
+**Publication boundary:** C127's private source and installation ZIP, personal books, account data, model outputs and credentials remain outside this public GitHub repository. Only these public-safe milestone notes are published, and no home server was touched.
 
 ## Current stopping point
 

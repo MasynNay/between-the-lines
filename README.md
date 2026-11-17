@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C127:** Adds an owner-only **disposable restore rehearsal** for a verified staged installation. A synthetic post-write restoration is checked without altering the original or staged library. Fresh-package verification passed **1,080 offline tests** and **15 focused tests**. This is **not** a certified live Docker rollback. The 20 real `parse5` cases and independently scored Ollama comprehension remain unverified; no private source or installer is included here.
+
+
 - **Private application C126:** A newly verified private checkpoint adds bounded offline regression batches and stricter non-destructive upgrade-stage audits. **1,077 offline tests passed across 12 batches**, including a fresh-extraction run. The **20 real `parse5` integration tests remain unverified**, and there are no real human-reviewed Ollama scores, validated Docker cutover, or post-write rollback. Nothing from the private C126 package is included here.
 
 
