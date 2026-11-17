@@ -87,6 +87,16 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [x] Public HTTPS homepage, demo, PDF.js module, and PDF.js worker all returned successful HTTPS responses from the GitHub Actions runner on November 16, 2026. Recheck after DNS changes; physical-device review is still pending.
 - [ ] Run independent assistive-technology checks on actual devices, then progress to the P1 private Ollama factual-accuracy benchmark.
 
+## C118 private development checkpoint (November 16, 2026)
+
+- [x] Preserve separately narrated interactions in source-linked family relationship timelines without promoting those interactions to romantic, familial, or motivational claims.
+- [x] Add a deterministic four-chapter original-fiction reference suite for character recognition, unsupported names, relationship contradictions, source citations, and chapter spoilers.
+- [x] Add an **offline reviewed-action scoring tool** to flag actor/target reversals and fabricated or premature citations in future local-model evaluations.
+- [x] Verify **1,055 passing Node tests across 226 test files**, source integrity, and a fresh-extracted complete private installation archive.
+- [ ] Independently review real-book annotations and run the genuine Ollama comprehension benchmark. The synthetic reference scores are **not** evidence of real-model or arbitrary-book accuracy.
+
+**Publication boundary:** C118's full private application source and installer remain outside this GitHub Pages repository. The public demo continues to be browser-only and does not use home computing resources.
+
 ## Current stopping point
 
 - The public portfolio site and browser demo are deployed using GitHub Pages and the custom domain.
