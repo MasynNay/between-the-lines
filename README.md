@@ -10,6 +10,11 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 **Availability:** the complete local installer is still a private development build. This public demo repository does not distribute the private source, app database, bundled install ZIP, or Ollama models. A public installable release should follow further security and independent model-accuracy review. Details are prominently presented on the website under **Full local app**, **Compare editions**, and **Getting started**.
 
+## Current engineering checkpoints
+
+- **Public reading room C122:** whole-word PDF/TXT search, exact-phrase-first ranking, clearly labeled partial matches, and improved keyboard navigation to search answers and cited pages. The real browser PDF.js and privacy tests passed before deployment.
+- **Private application C123:** local-only bounded Ollama benchmark batches, strict offline aggregation, and individual gold-blinded human review packets. The package source was integrity-checked, but **no real Ollama comprehension benchmark or independent human evaluation has happened**. The genuine `parse5` HTML/Wikipedia integration remains unverified (20 checks). The private code and installer are **not part of this public repository**.
+
 ## Explore
 
 - **Development roadmap and stopping point:** [ROADMAP.md](ROADMAP.md)
@@ -47,7 +52,7 @@ If the repo is created first and GitHub is connected to ChatGPT, the assistant c
 
 Open `index.html` or serve this folder with `python3 -m http.server 8765` and navigate to `http://localhost:8765`. The demo runs at `/demo/`.
 
-`node tests/demo.test.cjs`, `node tests/local-import.test.cjs`, and `node tests/privacy-workflow.test.cjs` check source grounding, spoiler boundaries, document removal, cancellation, and import limits. `python3 tests/browser_smoke.py` checks the DOM in isolated Chromium if Playwright is installed. **C117 adds a real PDF.js browser gate**: the GitHub Pages build bundles pinned PDF.js, then runs `node tests/pdf-browser-smoke.cjs` in Chromium at desktop and mobile widths. It imports a generated two-page PDF, validates exact citations and locked pages, tests an image-only PDF, and verifies no unexpected network requests or stored prose. PDF.js and Playwright Core are installed by the CI workflow, not committed into this source tree. An optional diagnostic checks production HTTPS routes after deployment.
+`node tests/demo.test.cjs`, `node tests/local-import.test.cjs`, and `node tests/privacy-workflow.test.cjs` check source grounding, spoiler boundaries, document removal, cancellation, and import limits. `python3 tests/browser_smoke.py` checks the DOM in isolated Chromium if Playwright is installed. **C117 added a real PDF.js browser gate**: the GitHub Pages build bundles pinned PDF.js, then runs `node tests/pdf-browser-smoke.cjs` in Chromium at desktop and mobile widths. It imports a generated two-page PDF, validates exact citations and locked pages, tests an image-only PDF, and verifies no unexpected network requests or stored prose. PDF.js and Playwright Core are installed by the CI workflow, not committed into this source tree. An optional diagnostic checks production HTTPS routes after deployment.
 
 ## Source confidentiality
 
