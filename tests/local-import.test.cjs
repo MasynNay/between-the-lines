@@ -32,9 +32,9 @@ assert.throws(()=>engine.build('No words',['image-only','']),/selectable text/i)
 // C122: literal matches must not mistake a name for part of another word.
 const searchBook=engine.build('Exact-word test',[
   'Ann and Maya found a lighthouse map beside the quiet harbor. The archive was open and full of long forgotten documents.',
-  'The annual festival mentioned a lighthouse map, but the page never names Ann. Many unrelated facts appear here.',
+  'The annual festival mentioned a lighthouse map, but it names no person. Many unrelated facts appear here.',
   'Maya and Ann returned to the archive. They wrote a short letter about the map beside a wooden cabinet.',
-  'An old manuscript about Anna described an annual parade and the nearby station. This page does not contain Ann as a separate name.'
+  'An old manuscript about Anna described an annual parade and the nearby station. This page contains only the longer name.'
 ]);
 const ann=engine.findPassages(searchBook,'Ann',4);
 assert.deepEqual(Array.from(ann,x=>x.page),[1,3],'Ann must not match annual or Anna');
