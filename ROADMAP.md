@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C128 private / C122 public)  
+**Last reviewed:** November 16, 2026 (C129 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C128 private complete-source checkpoint with source-byte drift protection and bounded offline verification. No public installer or certified live-host upgrade.
+**Private app checkpoint:** C129 private complete-source checkpoint adding storage-space preflight before staging and disposable restore rehearsals. No public installer or certified live-host upgrade.
 
 ## The two editions
 
@@ -207,6 +207,18 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **Actual local Ollama inference** on 32+ human-reviewed questions across two works, live Docker build/install, and post-write host/volume rollback remain unverified.
 
 **Boundary:** These are public-safe engineering milestone notes only. No C128 private application source, complete installer, user books, account records, settings, model output, or Docker state is published on GitHub Pages. No home host was accessed.
+
+## C129 private staging and recovery disk-space preflight (November 16, 2026)
+
+- [x] Estimate disk-space requirements before preparing a separate staged installation, including package source, stopped-app library data, optional private settings, and a reserve.
+- [x] Require additional free space of the greater of **64 MiB or 10% of estimated copy bytes**. This is an estimate, **not a space reservation** or guarantee against other disk writers.
+- [x] Preflight temporary restore-rehearsal storage, accounting for both backup and mutation workspace before copying data. Fail closed if space is insufficient.
+- [x] Reject unsafe symlinked, hard-linked or mounted package files encountered during estimation and preserve earlier source-byte drift and staged-copy integrity protections.
+- [x] The private C129 source passed **1,088/1,088 offline fixture tests in 12 bounded batches** after correcting an older roadmap assertion; focused storage, staging and source checks also passed.
+- [ ] **20 real `parse5` HTML/Wikipedia integration cases remain unverified** because the dependency was unavailable here. The offline fixture is not real parser certification.
+- [ ] Run genuine Ollama literary comprehension with independently reviewed 32+ answers and test live Docker-host cutover/rollback using disposable persistent volumes before a production upgrade.
+
+**Privacy boundary:** Only the public-safe milestone notes are published here. Private C129 source, installer ZIP, user books, accounts, settings, model output and Docker state remain separate. No home host has been touched.
 
 ## Current stopping point
 
