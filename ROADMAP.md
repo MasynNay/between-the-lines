@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 16, 2026 (C124 private / C122 public)  
+**Last reviewed:** November 16, 2026 (C125 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C124 private complete-source checkpoint with staging-only upgrade preparation. No publicly distributed installer or certified host upgrade.
+**Private app checkpoint:** C125 private complete-source checkpoint with independently verified staging copies. No publicly distributed installer or certified host upgrade.
 
 ## The two editions
 
@@ -164,6 +164,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Complete a separately annotated 32+ question **real** Ollama evaluation across two works, with independent human source review; synthetic model calls do not establish literary accuracy.
 
 **Privacy boundary:** The C124 private package, settings, model output, and user books remain separate from this public GitHub Pages repository. No home servers or containers were touched.
+
+## C125 private staged-copy verification (November 16, 2026)
+
+- [x] Extend the C124 inspection-only staging flow with a read-only `--verify-staged --confirm-stopped` mode that compares old and staged book/account bytes, directory layout, private settings and source integrity.
+- [x] Preserve empty library directories and verify restrictive permissions; use Linux atomic no-replace publication to prevent an empty destination being overwritten during a race.
+- [x] Fresh-extract and verify the complete private C125 package: **889 protected source files**, **439 protected Docker-target files**, **305 resolved relative imports**, and **58/58 focused tests passing**.
+- [ ] Full C125 offline regression **not certified**: first completed run had 1,071 passes and 2 documentation-version failures; the affected tests were corrected and passed, but the final entire-suite retry stalled without a complete result.
+- [ ] **20 genuine `parse5` integration checks are unverified** because the real dependency is absent; offline parser fixtures do not establish live HTML/Wikipedia correctness.
+- [ ] Real Ollama answers with 32+ independently human-reviewed questions, actual Docker installation, real-host upgrade, and rollback after new-version writes remain unverified.
+
+**Boundary:** This public repository contains only milestone notes. Neither private C125 source nor any books, accounts, credentials, Docker state or model output have been published. No home server was accessed.
 
 ## Current stopping point
 
