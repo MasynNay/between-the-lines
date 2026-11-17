@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C128:** Fixes a stopped-app upgrade verification gap: checks **real source bytes and private settings** at the beginning and end of staging, even when file size and modification time are unchanged; refuses swapped file identities and symlinked private checksum sources. A separately extracted C128 archive passed **1,084 offline tests in 12 bounded batches** and new drift regression tests. The **20 real `parse5` integration cases remain unverified**, as do genuine model accuracy and Docker-host upgrade/rollback. The private C128 installer and code are **not published here**.
+
+
 - **Private application C127:** Adds an owner-only **disposable restore rehearsal** for a verified staged installation. A synthetic post-write restoration is checked without altering the original or staged library. Fresh-package verification passed **1,080 offline tests** and **15 focused tests**. This is **not** a certified live Docker rollback. The 20 real `parse5` cases and independently scored Ollama comprehension remain unverified; no private source or installer is included here.
 
 
