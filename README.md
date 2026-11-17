@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C131:** Adds a synthetic-only, opt-in Docker-volume recovery rehearsal with protected snapshot/restore checks. The *offline unit and fixture tests* passed **1,100/1,100** from a fresh source ZIP, with **24 focused tests** passing. **Actual Docker execution did not occur**; real `parse5` integration, independent Ollama accuracy and a live version-to-version rollback are also unverified. This public repository contains no C131 private app source or installer.
+
+
 - **Private application C130:** Introduces an exact **20-case real `parse5` test gate** with a dependency-free plan and fail-closed execution that rejects the offline fixture. A fresh private ZIP passed **1,092 offline fixture tests** and **11 focused tests**. **The 20 genuine parser tests remain unverified** because the real dependency could not be fetched here. Real Ollama comprehension, Docker build and live data-preserving upgrades are also unverified. The private installer/source is **not** in this repository.
 
 
