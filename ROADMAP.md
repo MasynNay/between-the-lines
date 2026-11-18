@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 18, 2026 (C138 private / C122 public)  
+**Last reviewed:** November 18, 2026 (C139 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C138 private complete-source checkpoint with deliberately limited, explicitly named first-person dialogue counteraccounts in real imported-book Q&A. No public installer, independently reviewed model-accuracy certification or live-host upgrade.
+**Private app checkpoint:** C139 private complete-source checkpoint with conservative explicit named-speaker multi-quote evidence screening in actual imported-book Q&A. No public installer, independently reviewed model accuracy or certified live upgrade.
 
 ## The two editions
 
@@ -321,6 +321,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **Genuine local Ollama inference, independent human comprehension review, real Docker-volume rehearsal, version-to-version live migration and post-write rollback remain unverified**. Mocked HTTP and lexical negative evidence screening are not proof of full literary understanding.
 
 **Privacy boundary:** Public GitHub receives only this milestone summary and the existing static demonstration. Private source, complete C138 ZIP, benchmark passages, personal books, accounts, credentials, review data and home-host services are **not published or accessed**.
+
+## C139 private explicitly named multi-speaker dialogue (November 18, 2026)
+
+- [x] Extend the **actual imported-book question endpoint** from C138's single direct quote to **2–8 distinct quoted turns**, allowing a first-person denied action to be associated with the correct explicitly named adjacent speaker, rather than ignoring every multi-quotation passage.
+- [x] **Fail closed on ambiguous scenes:** Every turn must have exactly one adjacent, explicitly named speech tag. Any anonymous or pronoun-only speaker, missing/competing tag, unmatched quotation mark or excessive number of turns invalidates the **entire multi-turn scene** for this heuristic. It does not invent relationships or resolve third-person pronouns.
+- [x] Withhold disputed model interpretations when narrow actor/action/object screening finds contrary **testimony**, without adjudicating which source account is correct. Keep reader-scoped original passages visible, including a contradictory excerpt ranked below the usual preview. The live HTTP route was checked against a **mocked Ollama service**, with unread chapter data excluded from its prompts.
+- [x] Verify the exact privately packaged C139 ZIP **from a fresh extraction**: **1,169/1,169 offline fixture tests, zero failures, 42/42 batches**, **47/47 focused tests**, **1,007 protected source hashes**, **492 protected Docker-target files**, and **338 resolved Docker imports with no missing targets**.
+- [ ] **20 genuine `parse5@7.3.0` HTML/Wikipedia integration tests remain unverified.** The locked parser is not installed here, and the genuine-parser gate correctly refuses to certify it.
+- [ ] **Genuine local Ollama comprehension, independent human answer review, a real Docker volume recovery, version-to-version cutover and post-write rollback remain unverified.** The initial working-tree full run was interrupted; the authoritative final ZIP clean-extraction full run passed all 42 batches.
+
+**Publication boundary:** This GitHub repository receives only public-safe milestone documentation and the distinct static browser demo. The private C139 source, installation ZIP, personal books, accounts, credentials, test stories, model output and review materials are not published. No home host was accessed.
 
 ## Current stopping point
 
