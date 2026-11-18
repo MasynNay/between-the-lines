@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C137:** Improves **real imported-book answer screening** for *but/yet/however* contrast clauses, explicit named speaker attribution, and before/after/until chronology without treating disputed testimony as proven true. A freshly extracted private archive passed **1,151 offline fixture tests across 25 batches**, **32 focused tests**, and verified **334 Docker imports** with none missing. Its private-book HTTP tests use a **mocked** Ollama server. **Real Ollama accuracy, 20 genuine `parse5` integrations and Docker-host recovery remain unverified.** No private application source or ZIP is distributed through this repository.
+
+
 - **Private application C136:** The real imported-book question route now examines **individual statements within each retrieved passage**, fixing a missed-denial case when an unrelated action appeared first. It conservatively handles event times, distinguishes attributed counteraccounts internally, withholds disputed automated findings, and preserves the original reader-completed source excerpts. A fresh private ZIP passed **1,142 offline fixture tests in 13 batches** and **23 focused tests**, including the HTTP endpoint against a **mocked** model. Real Ollama comprehension and independent human review are **not** certified; the 20 genuine `parse5` cases and actual Docker-host recovery remain unverified. The private code and installer are **not** in this repository.
 
 
