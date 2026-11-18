@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C134 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C135 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C134 private complete-source checkpoint with separate gold-blinded two-reader review of candidate model responses. No public installer, actual independent human evaluation, certified model accuracy or live-host upgrade.
+**Private app checkpoint:** C135 private complete-source checkpoint with cross-passage negative evidence screening in the real imported-book Q&A route. No public installer, genuine model accuracy certification or live-host upgrade.
 
 ## The two editions
 
@@ -274,6 +274,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **20 genuine `parse5@7.3.0` HTML/Wikipedia cases remain unverified** (dependency absent here); actual Docker-volume rehearsal, version-to-version migration and post-write rollback also remain unverified.
 
 **Privacy boundary:** Public GitHub contains only milestone notes and the separate static browser demo. No private source, C134 archive, original benchmark passages, personal books, accounts, credentials, model reports or reviewer packets are published. No home server was accessed.
+
+## C135 private-book cross-passage evidence screening (November 17, 2026)
+
+- [x] Change the **actual private `/api/private-book/ask` question pipeline**: the second local-model review receives the entire bounded set of retrieved original passages available through the reader's selected chapter/page, rather than only the candidate's own quote. Later chapters are never supplied.
+- [x] Add a narrow, deterministic **same-actor, same-action, same-object and compatible-time negative-witness veto**. Even a model's positive review cannot promote a disputed draft to a verified answer. A different actor, object, time or overlapping retrieval window is not automatically treated as a contradictory account.
+- [x] Preserve directly retrieved original citations in the user response, including a conflicting source that ranked below the default preview. State that a dispute was found without declaring which source account is true; source-match and model-approval heuristics **do not prove narrative entailment**.
+- [x] Verify the private C135 source from a fresh ZIP: **977 source hashes**, **482 protected Docker-target files**, **330 Docker relative imports with zero missing**, **26 focused checks**, and **1,134/1,134 offline fixture tests across 13/13 batches**, including a real local HTTP route test with a **mocked** Ollama server. The bounded offline suite passed both before and after final extraction.
+- [ ] **Actual comprehension remains unverified**: no genuine Ollama inference, independent human grading of model answers, or full-length-book semantic evaluation occurred.
+- [ ] **20 genuine `parse5@7.3.0` integration checks remain unverified** because the dependency is unavailable here. Real Docker build/recovery, live migration, post-write rollback, and accessibility testing also remain open.
+
+**Privacy boundary:** Only this high-level milestone summary is in the public repository. C135 private application code, installer ZIP, imported books, account data, benchmark passages, model results, credentials, and home-host services are not published or accessed.
 
 ## Current stopping point
 
