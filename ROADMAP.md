@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C132 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C133 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C132 private complete-source checkpoint with a two-original-work, 32-question local model evaluation kit. No public installer, certified model accuracy, or live-host upgrade.
+**Private app checkpoint:** C133 private complete-source checkpoint with gold-blinded, two-reader source annotation preparation and conflict detection. No public installer, actual human evaluation, certified model accuracy or live-host upgrade.
 
 ## The two editions
 
@@ -251,6 +251,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] The **20 genuine `parse5@7.3.0` HTML/Wikipedia integration tests remain unverified** (npm registry unavailable here), as does real Docker volume recovery and an actual version-to-version data-preserving upgrade.
 
 **Privacy boundary:** This public repository records only milestone notes. The C132 private source ZIP, original benchmark source passages, model reports, account information, user books, credentials and Docker state remain outside GitHub Pages. No home server was accessed.
+
+## C133 private gold-blind independent-review preparation (November 17, 2026)
+
+- [x] Add an **offline gold-label review workflow** for the previous C132 two-work, 32-question comprehension fixture: create 32 separate source-only packets scoped to each question's completed chapters, plus independent blank reviewer worksheets. The packets expose neither the assistant-authored gold labels nor model answers or later chapters.
+- [x] Validate two completed, **self-attested** reader sheets for all 32 bound question IDs, matching fixture hashes, stopping points, explanatory notes and verbatim quotations for supported claims. Flag mismatches between reviewers and provisional gold labels for real adjudication; unknown/unclear answers cannot silently acquire source citations.
+- [x] Refuse overwritten or linked review inputs; write new private output with owner-only permissions and require review artifacts to live outside the private application source tree.
+- [x] Fresh-extracted private C133 ZIP passed **1,116/1,116 offline fixture tests across 12 bounded batches**, plus **23 focused tests**, and verified **963 protected source files**, **477 Docker-target source files**, and the **197-import server runtime closure**.
+- [ ] **No actual independent human review has happened.** Self-reported reviewer aliases and two matching worksheets cannot authenticate reviewers or establish independent verification. This tool always returns `releaseGate:false` and `certifiedGoldAccuracy:null`.
+- [ ] **No genuine Ollama inference**, 20-case real `parse5` HTML/Wikipedia integration, or actual Docker-host recovery/upgrade test has been performed. All remain release blockers.
+
+**Publication boundary:** The private C133 source, model reports, original story passages, review packets, books, accounts, credentials, and containers are not part of this public repository. Only public-safe roadmap notes are published.
 
 ## Current stopping point
 
