@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C135 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C136 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C135 private complete-source checkpoint with cross-passage negative evidence screening in the real imported-book Q&A route. No public installer, genuine model accuracy certification or live-host upgrade.
+**Private app checkpoint:** C136 private complete-source checkpoint with sentence-aware counteraccount screening in real imported-book Q&A. No public installer, genuine model accuracy certification or live-host upgrade.
 
 ## The two editions
 
@@ -285,6 +285,18 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **20 genuine `parse5@7.3.0` integration checks remain unverified** because the dependency is unavailable here. Real Docker build/recovery, live migration, post-write rollback, and accessibility testing also remain open.
 
 **Privacy boundary:** Only this high-level milestone summary is in the public repository. C135 private application code, installer ZIP, imported books, account data, benchmark passages, model results, credentials, and home-host services are not published or accessed.
+
+## C136 private source-statement counteraccount audit (November 17, 2026)
+
+- [x] Improve the **actual imported-book Q&A endpoint** by scanning individual statements inside the retrieved, reader-completed source passages for same-actor/action/object counteraccounts. In C135, an unrelated first action in a passage could mask a relevant denial in a later sentence.
+- [x] Isolate time references to the counterstatement being checked. An unrelated earlier sentence's time or a distinctly earlier/later event cannot silently establish that two descriptions refer to the same deed.
+- [x] Internally distinguish an attributed report (e.g., “According to Tomas…”) from a direct contrary statement. Both can trigger withholding of the uncertain automated interpretation, but **neither is automatically established as objective truth**.
+- [x] Keep directly retrieved original passages visible, including contrary accounts below the usual preview; never fetch future unread chapters or another user's documents.
+- [x] Fresh-extracted C136 private ZIP: **984 integrity-checked source files** including **484 protected Docker-target files**; **332 resolved static imports**, no missing imports; **23 focused tests**, and **1,142/1,142 offline fixture tests in 13/13 bounded batches**. The actual HTTP route was tested with a **mocked** local Ollama server, not genuine inference.
+- [ ] **20 genuine `parse5@7.3.0` HTML/Wikipedia cases remain unverified.** The real locked dependency is absent from this development environment and the offline fixture does not count as integration certification.
+- [ ] Run genuine Ollama inference and independent human assessment across real source passages, actual disposable Docker-host recovery, version-to-version data-preserving upgrade and post-write rollback, and real-device accessibility tests before claiming production readiness.
+
+**Privacy boundary:** This public repository contains only milestone notes and a separate static browser demo. The C136 private application, ZIP, original review passages, imported books, accounts, credentials, model output and live Docker state are not published or accessed.
 
 ## Current stopping point
 
