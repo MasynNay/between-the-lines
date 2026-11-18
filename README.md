@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C134:** Adds **gold-blinded source review of actual candidate model answers**, distinct from C133's gold-label review, with 32 chapter-scoped packets, separate reader worksheets, source-citation vetoes and private disagreement reports. A fresh private archive passed **1,126 offline fixture tests** and **27 focused tests**. **No real Ollama run or independent human review occurred**, and the 20 genuine `parse5` checks, Docker-host recovery and live upgrades remain unverified. The private installer/source and review packets are **not** included here.
+
+
 - **Private application C133:** Builds a **gold-blinded, two-reader source-annotation workflow** for the 32-question synthetic comprehension benchmark. Reader packets contain no gold labels or later chapters, and an offline combiner flags missing answers, unsupported citations, disagreements and provisional label conflicts. A private fresh-extracted ZIP passed **1,116 offline fixture tests** and **23 focused tests**. **No real reviewers, Ollama inference, genuine `parse5` integration or Docker host run occurred**. This public repository does not distribute the private application, source passages or review packets.
 
 

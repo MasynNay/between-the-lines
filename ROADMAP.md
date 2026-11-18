@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C133 private / C122 public)  
+**Last reviewed:** November 17, 2026 (C134 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C133 private complete-source checkpoint with gold-blinded, two-reader source annotation preparation and conflict detection. No public installer, actual human evaluation, certified model accuracy or live-host upgrade.
+**Private app checkpoint:** C134 private complete-source checkpoint with separate gold-blinded two-reader review of candidate model responses. No public installer, actual independent human evaluation, certified model accuracy or live-host upgrade.
 
 ## The two editions
 
@@ -262,6 +262,18 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **No genuine Ollama inference**, 20-case real `parse5` HTML/Wikipedia integration, or actual Docker-host recovery/upgrade test has been performed. All remain release blockers.
 
 **Publication boundary:** The private C133 source, model reports, original story passages, review packets, books, accounts, credentials, and containers are not part of this public repository. Only public-safe roadmap notes are published.
+
+## C134 private model-response review and source-citation vetoes (November 17, 2026)
+
+- [x] Add a separate, offline **32-question, two-reader MODEL-response review** complementing C133's blinded gold-reference-label review. It accepts complete self-supplied C132 batch reports and refuses missing, failed, repeated, mixed-model, out-of-scope, or substituted-source answers.
+- [x] Generate per-question packets containing the candidate model answer plus only the story chapters available at that stopping point. Withhold assistant-authored gold labels, expected answer terms, proxy scores, and later chapters. Blank reader worksheets are bound to each model packet hash.
+- [x] Verify claimed citations against their original text/chapter and apply narrow deterministic contradiction vetoes. An answer marked accurate must have separately selected verbatim reviewer evidence if the candidate asserts a supported claim. Exact quote matching alone **never proves** narrative truth.
+- [x] Reconcile two self-attested reviewer worksheets, detecting disagreements, unreviewed/uncertain outcomes, invalid references, and altered packets. Private summaries omit story text and model answer bodies, and always set `certifiedModelAccuracy:null` and `releaseGate:false`.
+- [x] Verify a fresh-extracted private C134 ZIP: **970 source hashes** including **480 protected Docker-target files**, **327 static Docker relative imports resolved with zero missing**, **27 focused tests**, and **1,126/1,126 offline fixture regression tests in 12/12 batches**, with no failures.
+- [ ] **Real inference and independent human review have NOT occurred.** A caller-provided model JSON report and two reviewer aliases cannot prove that Ollama ran or that humans were independent. The short original test stories also do not establish full-book comprehension.
+- [ ] **20 genuine `parse5@7.3.0` HTML/Wikipedia cases remain unverified** (dependency absent here); actual Docker-volume rehearsal, version-to-version migration and post-write rollback also remain unverified.
+
+**Privacy boundary:** Public GitHub contains only milestone notes and the separate static browser demo. No private source, C134 archive, original benchmark passages, personal books, accounts, credentials, model reports or reviewer packets are published. No home server was accessed.
 
 ## Current stopping point
 
