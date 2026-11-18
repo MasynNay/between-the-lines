@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 17, 2026 (C136 private / C122 public)  
+**Last reviewed:** November 18, 2026 (C137 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C136 private complete-source checkpoint with sentence-aware counteraccount screening in real imported-book Q&A. No public installer, genuine model accuracy certification or live-host upgrade.
+**Private app checkpoint:** C137 private complete-source checkpoint with contrast-clause screening, explicit speaker attribution and cautious event-time comparison in real imported-book Q&A. No public installer, genuine model-accuracy certification or live-host upgrade.
 
 ## The two editions
 
@@ -297,6 +297,19 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] Run genuine Ollama inference and independent human assessment across real source passages, actual disposable Docker-host recovery, version-to-version data-preserving upgrade and post-write rollback, and real-device accessibility tests before claiming production readiness.
 
 **Privacy boundary:** This public repository contains only milestone notes and a separate static browser demo. The C136 private application, ZIP, original review passages, imported books, accounts, credentials, model output and live Docker state are not published or accessed.
+
+## C137 private contrast-clause and speaker attribution safeguards (November 18, 2026)
+
+- [x] Improve **actual imported-book private Q&A**, not only benchmark scripts: split bounded retrieved sentences at explicit contrasts (*but*, *yet*, *however*, *nevertheless*) to catch a relevant denial after a different earlier action in the same sentence.
+- [x] Retain an **explicitly named reporter** from patterns such as “According to Tomas,” “Tomas said,” and trailing “said Tomas” as metadata on an *attributed counteraccount*. Anonymous “someone” reports have no invented identity. This is source attribution, not confirmation that the speaker is reliable.
+- [x] Handle *before*, *after*, *until*, *since*, and *by the time* conservatively, avoiding false certainty that two descriptions refer to the same occurrence; explicitly different dawn/dusk references do not constitute the same event.
+- [x] Withhold a disputed local-model interpretation while preserving the original reader-completed source passages, including opposing excerpts below the usual preview. The mocked private-book HTTP test confirms unread chapters never enter its prompts.
+- [x] Verify the private C137 ZIP **from a fresh extraction**: **1,151/1,151 offline fixture tests across 25/25 bounded batches**, **32/32 focused tests**, **991 protected host source files**, **486 protected Docker-target files**, and **334 resolved static imports with none missing**.
+- [ ] **20 real `parse5@7.3.0` HTML/Wikipedia integration checks remain unverified** because the real locked package is not available in the development environment. Offline fixtures are not genuine parser certification.
+- [ ] **Actual local Ollama inference and independently scored comprehension remain unverified**. The private HTTP tests use an explicitly mocked model; lexical contradiction screening does not establish literary truth.
+- [ ] **Actual Docker image, disposable restore, version-to-version migration and post-write rollback remain unverified**. Existing user accounts, books and home-host resources have not been accessed.
+
+**Public/private boundary:** These are public-safe checkpoint notes only. The private C137 source and ZIP, original test stories, model/reviewer materials, books, accounts, credentials, and host data are **not** published on GitHub Pages.
 
 ## Current stopping point
 
