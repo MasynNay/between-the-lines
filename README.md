@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C138:** Adds a conservative **single-speaker first-person quoted-denial check** to the real imported-book question endpoint. It can attribute a direct "I never opened" testimony to an explicitly named adjacent speaker, flag a potentially conflicting automated claim, and preserve original passages. Unnamed voices, ambiguous quotations and pronoun resolution are **not guessed**. A fresh private ZIP passed **1,159 offline fixture tests across 42 batches**, **40 focused tests**, and **336 verified Docker imports**; HTTP tests used a **mocked local Ollama**. **Genuine model accuracy, 20 real `parse5` cases and Docker recovery/upgrade remain unverified.** No private source, installer, books or reviewer material is published here.
+
+
 - **Private application C137:** Improves **real imported-book answer screening** for *but/yet/however* contrast clauses, explicit named speaker attribution, and before/after/until chronology without treating disputed testimony as proven true. A freshly extracted private archive passed **1,151 offline fixture tests across 25 batches**, **32 focused tests**, and verified **334 Docker imports** with none missing. Its private-book HTTP tests use a **mocked** Ollama server. **Real Ollama accuracy, 20 genuine `parse5` integrations and Docker-host recovery remain unverified.** No private application source or ZIP is distributed through this repository.
 
 
