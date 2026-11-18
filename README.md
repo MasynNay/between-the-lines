@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C135:** Improves the **real imported-book question endpoint**, not only evaluation tooling. The second local-model evidence review now sees all bounded retrieved completed-reading passages; an independent lexical guard can withhold a disputed actor/action/object claim even if the model approved it, while keeping conflicting original excerpts visible. A fresh private ZIP passed **1,134 offline fixture tests in 13 batches** and **26 focused tests**, including a mocked Ollama HTTP test. **No real model accuracy is certified**; 20 genuine `parse5` integration tests, independent human grading and Docker-host recovery remain unverified. The private source and installer are **not part of this public repository**.
+
+
 - **Private application C134:** Adds **gold-blinded source review of actual candidate model answers**, distinct from C133's gold-label review, with 32 chapter-scoped packets, separate reader worksheets, source-citation vetoes and private disagreement reports. A fresh private archive passed **1,126 offline fixture tests** and **27 focused tests**. **No real Ollama run or independent human review occurred**, and the 20 genuine `parse5` checks, Docker-host recovery and live upgrades remain unverified. The private installer/source and review packets are **not** included here.
 
 
