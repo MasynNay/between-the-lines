@@ -1,9 +1,9 @@
 # Between the Lines — Product Roadmap
 
-**Last reviewed:** November 18, 2026 (C137 private / C122 public)  
+**Last reviewed:** November 18, 2026 (C138 private / C122 public)  
 **Public site:** https://btl.masynnay.com  
 **Public source:** https://github.com/MasynNay/between-the-lines  
-**Private app checkpoint:** C137 private complete-source checkpoint with contrast-clause screening, explicit speaker attribution and cautious event-time comparison in real imported-book Q&A. No public installer, genuine model-accuracy certification or live-host upgrade.
+**Private app checkpoint:** C138 private complete-source checkpoint with deliberately limited, explicitly named first-person dialogue counteraccounts in real imported-book Q&A. No public installer, independently reviewed model-accuracy certification or live-host upgrade.
 
 ## The two editions
 
@@ -310,6 +310,17 @@ The **public browser demonstration** is a static GitHub Pages site with local-in
 - [ ] **Actual Docker image, disposable restore, version-to-version migration and post-write rollback remain unverified**. Existing user accounts, books and home-host resources have not been accessed.
 
 **Public/private boundary:** These are public-safe checkpoint notes only. The private C137 source and ZIP, original test stories, model/reviewer materials, books, accounts, credentials, and host data are **not** published on GitHub Pages.
+
+## C138 private single-speaker first-person dialogue evidence (November 18, 2026)
+
+- [x] Improve the **actual private imported-book question-answering engine**: a single *directly quoted* first-person denial can be compared against a conflicting named-actor draft when the adjacent speech tag explicitly identifies the quotation's speaker. The check does not infer whether either account is true; it withholds the disputed AI finding and retains both original passages for the reader.
+- [x] Fail conservatively for anonymous or pronoun-only speakers, another named speaker, direct affirmations, and passages with multiple quoted utterances. Do **not** guess "he/she/they", relations, identities or narrative intent. Treat named testimony as a different account rather than verified narration.
+- [x] Respect source-section headings and trailing unquoted narration in private imports. Mocked local-Ollama HTTP tests verify both passages are disclosed, the disputed automated answer is withheld and unread chapters never enter the model prompt.
+- [x] Verify the full C138 private archive **from fresh extraction**: **1,159/1,159 offline fixture tests across 42/42 bounded batches**, **40/40 focused tests**, **999 protected source files** including **489 Docker-target files**, and **336 static Docker imports** with zero missing. Working-source and clean-extraction regression both passed.
+- [ ] The **20 genuine `parse5@7.3.0` HTML/Wikipedia integration tests remain unverified**, absent the real locked parser here; an offline fixture cannot certify parsing.
+- [ ] **Genuine local Ollama inference, independent human comprehension review, real Docker-volume rehearsal, version-to-version live migration and post-write rollback remain unverified**. Mocked HTTP and lexical negative evidence screening are not proof of full literary understanding.
+
+**Privacy boundary:** Public GitHub receives only this milestone summary and the existing static demonstration. Private source, complete C138 ZIP, benchmark passages, personal books, accounts, credentials, review data and home-host services are **not published or accessed**.
 
 ## Current stopping point
 
