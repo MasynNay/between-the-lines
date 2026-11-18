@@ -12,6 +12,9 @@ The public GitHub Pages demo is **not** the same as the local application. It ha
 
 ## Current engineering checkpoints
 
+- **Private application C136:** The real imported-book question route now examines **individual statements within each retrieved passage**, fixing a missed-denial case when an unrelated action appeared first. It conservatively handles event times, distinguishes attributed counteraccounts internally, withholds disputed automated findings, and preserves the original reader-completed source excerpts. A fresh private ZIP passed **1,142 offline fixture tests in 13 batches** and **23 focused tests**, including the HTTP endpoint against a **mocked** model. Real Ollama comprehension and independent human review are **not** certified; the 20 genuine `parse5` cases and actual Docker-host recovery remain unverified. The private code and installer are **not** in this repository.
+
+
 - **Private application C135:** Improves the **real imported-book question endpoint**, not only evaluation tooling. The second local-model evidence review now sees all bounded retrieved completed-reading passages; an independent lexical guard can withhold a disputed actor/action/object claim even if the model approved it, while keeping conflicting original excerpts visible. A fresh private ZIP passed **1,134 offline fixture tests in 13 batches** and **26 focused tests**, including a mocked Ollama HTTP test. **No real model accuracy is certified**; 20 genuine `parse5` integration tests, independent human grading and Docker-host recovery remain unverified. The private source and installer are **not part of this public repository**.
 
 
